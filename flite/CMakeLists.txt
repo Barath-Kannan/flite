@@ -3,6 +3,8 @@ project(flite CXX C)
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 set(CMAKE_CXX_STANDARD 14)
 
+add_definitions(-DCST_NO_SOCKETS)
+
 if(${WINDOWS})
     set(flite_audio_driver_src src/audio/au_wince.c)
     set(flite_audio_driver_def CST_AUDIO_WINCE)
@@ -39,7 +41,7 @@ add_library(flite_audio
     src/audio/audio.c
     src/audio/au_streaming.c
     ${flite_audio_driver_src})
-    
+
 target_include_directories(flite_audio
     PUBLIC inc
     PUBLIC src/audio
@@ -64,7 +66,7 @@ add_library(flite_regex
     src/regex/regsub.c)
 
 target_include_directories(flite_regex PUBLIC inc PUBLIC src/regex)
-    
+
 add_library(flite_stats
     src/stats/cst_cart.c
     src/stats/cst_viterbi.c
@@ -112,17 +114,20 @@ add_library(flite_cg
 target_include_directories(flite_cg
     PUBLIC inc
     PUBLIC src/flite_cg)
-    
+
 target_link_libraries(flite_cg
-    PUBLIC flite_stats
+    PUBLIC flite_stats)
+
+if(${UNIX})
+target_link_libraries(flite_cg
     PUBLIC m)
-    
+endif()
 
 add_library(flite_lexicon
     src/lexicon/cst_lexicon.c
     src/lexicon/cst_lts.c
     src/lexicon/cst_lts_rewrites.c)
-    
+
 target_include_directories(flite_lexicon PUBLIC inc)
 
 add_library(flite_speech
@@ -148,14 +153,14 @@ add_library(flite_synth
     src/synth/cst_ffeatures.c
     src/synth/cst_ssml.c
     src/synth/flite.c)
-    
+
 target_include_directories(flite_synth PUBLIC inc)
 
 target_link_libraries(flite_synth
     PUBLIC flite_speech
     PUBLIC flite_cg
     PUBLIC flite_lexicon)
-    
+
 add_library(flite_wavesynth
     src/wavesynth/cst_units.c
     src/wavesynth/cst_clunits.c
@@ -163,21 +168,21 @@ add_library(flite_wavesynth
     src/wavesynth/cst_sigpr.c
     src/wavesynth/cst_sts.c
     src/wavesynth/cst_reflpc.c)
-    
+
 target_include_directories(flite_wavesynth PUBLIC inc)
 
 add_library(flite_cmu_grapheme_lang
     lang/cmu_grapheme_lang/cmu_grapheme_lang.c
     lang/cmu_grapheme_lang/cmu_grapheme_phrasing_cart.c
     lang/cmu_grapheme_lang/cmu_grapheme_phoneset.c)
-    
+
 target_include_directories(flite_cmu_grapheme_lang
     PUBLIC inc
     PUBLIC lang/cmu_grapheme_lang)
-    
+
 target_link_libraries(flite_cmu_grapheme_lang
     PUBLIC flite_synth)
-    
+
 add_library(flite_cmu_grapheme_lex
     lang/cmu_grapheme_lex/cmu_grapheme_lex.c
     lang/cmu_grapheme_lex/grapheme_unitran_tables.c)
@@ -190,17 +195,17 @@ add_library(flite_cmu_indic_lang
     lang/cmu_indic_lang/cmu_indic_lang.c
     lang/cmu_indic_lang/cmu_indic_phoneset.c
     lang/cmu_indic_lang/cmu_indic_phrasing_cart.c)
-    
+
 target_include_directories(flite_cmu_indic_lang
     PUBLIC inc
     PUBLIC lang/cmu_indic_lang)
-    
+
 target_link_libraries(flite_cmu_indic_lang
     PUBLIC flite_synth)
-    
+
 add_library(flite_cmu_indic_lex
     lang/cmu_indic_lex/cmu_indic_lex.c)
-    
+
 target_include_directories(flite_cmu_indic_lex
     PUBLIC inc
     PUBLIC lang/cmu_indic_lex)
@@ -216,12 +221,12 @@ add_library(flite_cmulex
 #lang/cmulex/cmu_lex_num_bytes.c
 #lang/cmulex/cmu_lex_data_raw.c
 #lang/cmulex/cmu_lex_entries_huff_table.c
-#lang/cmulex/cmu_lex_phones_huff_table.c    
+#lang/cmulex/cmu_lex_phones_huff_table.c
 
 target_include_directories(flite_cmulex
     PUBLIC inc
     PUBLIC lang/cmulex)
-    
+
 add_library(flite_cmu_time_awb
     lang/cmu_time_awb/cmu_time_awb.c
     lang/cmu_time_awb/cmu_time_awb_cart.c
@@ -229,13 +234,13 @@ add_library(flite_cmu_time_awb
     lang/cmu_time_awb/cmu_time_awb_lex_entry.c
     lang/cmu_time_awb/cmu_time_awb_lpc.c
     lang/cmu_time_awb/cmu_time_awb_mcep.c)
-    
+
 target_include_directories(flite_cmu_time_awb
     PUBLIC inc
     PUBLIC lang/cmu_time_awb
     PUBLIC lang/usenglish
     PUBLIC lang/cmulex)
-    
+
 add_library(flite_cmu_us_kal
     lang/cmu_us_kal/cmu_us_kal.c
     lang/cmu_us_kal/cmu_us_kal_diphone.c
@@ -249,20 +254,20 @@ target_include_directories(flite_cmu_us_kal
     PUBLIC lang/cmu_us_kal
     PUBLIC lang/usenglish
     PUBLIC lang/cmulex)
-    
+
 add_library(flite_cmu_us_kal16
     lang/cmu_us_kal16/cmu_us_kal16.c
     lang/cmu_us_kal16/cmu_us_kal16_diphone.c
     lang/cmu_us_kal16/cmu_us_kal16_lpc.c
     lang/cmu_us_kal16/cmu_us_kal16_res.c
     lang/cmu_us_kal16/cmu_us_kal16_residx.c)
-    
+
 target_include_directories(flite_cmu_us_kal16
     PUBLIC inc
     PUBLIC lang/cmu_us_kal16
     PUBLIC lang/usenglish
     PUBLIC lang/cmulex)
-    
+
 add_library(flite_cmu_us_rms
     lang/cmu_us_rms/cmu_us_rms.c
     lang/cmu_us_rms/cmu_us_rms_cg.c
@@ -298,7 +303,7 @@ target_include_directories(flite_cmu_us_slt
     PUBLIC lang/cmu_us_slt
     PUBLIC lang/usenglish
     PUBLIC lang/cmulex)
-    
+
 add_library(flite_usenglish
     lang/usenglish/us_aswd.c
     lang/usenglish/us_dur_stats.c
@@ -316,22 +321,22 @@ add_library(flite_usenglish
     lang/usenglish/us_phrasing_cart.c
     lang/usenglish/us_pos_cart.c
     lang/usenglish/us_text.c)
-    
+
 target_include_directories(flite_usenglish
     PUBLIC inc
     PUBLIC lang/usenglish)
-    
+
 target_link_libraries(flite_usenglish
     PUBLIC flite_utils)
-    
+
 add_executable(flite_main
     src/main/flite_main.c
     src/main/flite_lang_list.c
     src/main/flite_voice_list.c)
-    
+
 target_include_directories(flite_main
     PUBLIC inc)
-    
+
 target_link_libraries(flite_main
     PUBLIC flite_audio
     PUBLIC flite_hrg

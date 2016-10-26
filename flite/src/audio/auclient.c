@@ -51,8 +51,6 @@
 
 #ifndef CST_NO_SOCKETS
 
-#include <unistd.h>
-
 int play_wave_client(cst_wave *w,const char *servername,int port,
 		     const char *encoding)
 {
@@ -80,7 +78,7 @@ int play_wave_client(cst_wave *w,const char *servername,int port,
 	sample_width = 1;
 	header.encoding = 2; /* unsigned char */
     }
-    else 
+    else
     {
 	sample_width = 2;
 	header.encoding = 3; /* short */
@@ -116,7 +114,7 @@ int play_wave_client(cst_wave *w,const char *servername,int port,
 		bytes[q] = cst_short_to_ulaw(w->samples[i+q]);
 	    r = write(audiofd,bytes,n);
 	}
-	else 
+	else
 	{
 	    for (q=0; q<n; q++)
 		if (CST_LITTLE_ENDIAN)
