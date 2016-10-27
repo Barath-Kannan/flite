@@ -81,11 +81,6 @@ o A compiler compatible cmake. Most compilers are already compatible.
 o An audio device isn't required as flite can write its output to
   a waveform file.
 
-Build Instructions:
-o Clone the repository
-o cmake -BBuild -H.
-o cmake --build build --config Release
-
 Windows systems may need to specify the generator when generating the build files.
 
 Supported platforms:
@@ -158,29 +153,10 @@ Compilation
 
 In general
 
-    tar zxvf flite-2.0.0-release.tar.gz
-    cd flite-2.0.0-release
-    ./configure
-    make
-
-Where tar is gnu tar (gtar), and make is gnu make (gmake).
-
-Configuration should be automatic, but maybe doesn't work in all cases
-especially if you have some new compiler.  You can explicitly set to
-compiler in config/config and add any options you see fit.   Configure
-tries to guess these but it might be able for cross compilation cases
-Interesting options there are
-
--DWORDS_BIGENDIAN=1  for bigendian machines (e.g. Sparc, M68x)
--DNO_UNION_INITIALIZATION=1  For compilers without C 99 union inintialization
--DCST_AUDIO_NONE     if you don't need/want audio support
-
-There are different sets of voices and languages you can select between
-them (and your own sets if you make config/XXX.lv).  For example
-
-   ./configure --with-langvox=transtac
-
-Will use the languages and voices defined in config/transtac.lv
+    git clone https://github.com/Barath-Kannan/flite flite
+    cd flite
+    cmake -Bbuild -H.
+    cmake --build build --config Release
 
 Usage:
 ------
