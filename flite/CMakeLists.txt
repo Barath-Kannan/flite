@@ -3,11 +3,10 @@ project(flite CXX C)
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 set(CMAKE_CXX_STANDARD 14)
 
-add_definitions(-DCST_NO_SOCKETS)
-
-if(${WINDOWS})
+if(${WIN32})
     set(flite_audio_driver_src src/audio/au_wince.c)
     set(flite_audio_driver_def CST_AUDIO_WINCE)
+	set(flite_audio_driver_lib Winmm)
 elseif(${UNIX})
     find_package(ALSA QUIET)
     find_package(PULSEAUDIO QUIET)
@@ -74,7 +73,7 @@ add_library(flite_stats
 
 target_include_directories(flite_stats PUBLIC inc)
 
-if(${WINDOWS})
+if(${WIN32})
     set(flite_utils_mmap src/utils/cst_mmap_win32.c)
 elseif(${UNIX})
     set(flite_utils_mmap src/utils/cst_mmap_posix.c)
@@ -100,6 +99,11 @@ add_library(flite_utils
     ${flite_utils_mmap})
 
 target_include_directories(flite_utils PUBLIC inc)
+
+if(${WIN32})
+    target_link_libraries(flite_utils
+        PUBLIC WSock32)
+endif()
 
 add_library(flite_cg
     src/cg/cst_cg.c
@@ -241,6 +245,24 @@ target_include_directories(flite_cmu_time_awb
     PUBLIC lang/usenglish
     PUBLIC lang/cmulex)
 
+add_library(flite_cmu_us_awb
+    lang/cmu_us_awb/cmu_us_awb_cg_durmodel.c
+    lang/cmu_us_awb/cmu_us_awb_cg_f0_trees.c
+    lang/cmu_us_awb/cmu_us_awb_cg_phonestate.c
+    lang/cmu_us_awb/cmu_us_awb_cg_single_mcep_trees.c
+    lang/cmu_us_awb/cmu_us_awb_cg_single_params.c
+    lang/cmu_us_awb/cmu_us_awb_cg.c
+    lang/cmu_us_awb/cmu_us_awb_spamf0_accent_params.c
+    lang/cmu_us_awb/cmu_us_awb_spamf0_accent.c
+    lang/cmu_us_awb/cmu_us_awb_spamf0_phrase.c
+    lang/cmu_us_awb/cmu_us_awb.c)
+
+target_include_directories(flite_cmu_us_awb
+    PUBLIC inc
+    PUBLIC lang/cmu_us_awb
+    PUBLIC lang/usenglish
+    PUBLIC lang/cmulex)
+
 add_library(flite_cmu_us_kal
     lang/cmu_us_kal/cmu_us_kal.c
     lang/cmu_us_kal/cmu_us_kal_diphone.c
@@ -356,4 +378,6 @@ target_link_libraries(flite_main
     PUBLIC flite_cmu_us_kal
     PUBLIC flite_cmu_us_kal16
     PUBLIC flite_cmu_us_slt
+    PUBLIC flite_cmu_us_rms
+    PUBLIC flite_cmu_us_awb
     PUBLIC flite_usenglish)

@@ -81,6 +81,23 @@ int cst_socket_close(int socket)
 
 int cst_socket_open(const char *host, int port)
 {
+#ifdef _MSC_VER
+	WSADATA wsaData;
+	WORD version;
+	int error;
+
+	version = MAKEWORD(2, 0);
+
+	error = WSAStartup(version, &wsaData);
+
+	/* check for error */
+	if (error != 0)
+	{
+		/* error occured */
+		return -1;
+	}
+#endif
+
     /* Return an FD to a remote server */
     struct sockaddr_in serv_addr;
     struct hostent *serverhost;
@@ -120,11 +137,29 @@ int cst_socket_open(const char *host, int port)
 int cst_socket_close(int socket)
 {
     return close(socket);
+	WSACleanup();
 }
 
 int cst_socket_server(const char *name, int port,
 		      int (process_client)(int name,int fd))
 {
+#ifdef _MSC_VER
+	WSADATA wsaData;
+	WORD version;
+	int error;
+
+	version = MAKEWORD(2, 0);
+
+	error = WSAStartup(version, &wsaData);
+
+	/* check for error */
+	if (error != 0)
+	{
+		/* error occured */
+		return -1;
+	}
+#endif
+
     struct sockaddr_in serv_addr;
     int fd, fd1;
     int client_name = 0;
