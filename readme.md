@@ -33,22 +33,22 @@ o Flite is designed for very small devices, such as PDAs, and also
 o Flite is not a replacement for Festival but an alternative run time
   engine for voices developed in the FestVox framework where size and
   speed is crucial.
-o Flite is all in ANSI C, it contains no C++ (until now) or Scheme, 
-  thus requires more care in programming, and is harder to customize 
+o Flite is all in ANSI C, it contains no C++ (until now) or Scheme,
+  thus requires more care in programming, and is harder to customize
   at run time.
 o It is thread safe
-o Voices, lexicons and language descriptions can be compiled 
-  (mostly automatically for voices and lexicons) into C representations 
+o Voices, lexicons and language descriptions can be compiled
+  (mostly automatically for voices and lexicons) into C representations
   from their FestVox formats
 o All voices, lexicons and language model data are const and in the
   text segment (i.e. they may be put in ROM).  As they are linked in
   at compile time, there is virtually no startup delay.
-o Although the synthesized output is not exactly the same as the same 
-  voice in Festival they are effectively equivalent.  That is, flite 
+o Although the synthesized output is not exactly the same as the same
+  voice in Festival they are effectively equivalent.  That is, flite
   doesn't sound better or worse than the equivalent voice in festival,
   just faster, smaller and scalable.
 o For standard diphone voices, maximum run time memory
-  requirements are approximately less than twice the memory requirement 
+  requirements are approximately less than twice the memory requirement
   for the waveform generated.  For 32bit archtectures
   this effectively means under 1M.
 o The flite program supports, synthesis of individual strings or files
@@ -75,38 +75,24 @@ flite synthesizes 9.79 time faster than real time.
 
 Requirements:  
 
-o A good C compiler, some of these files are quite large and some C
-  compilers might choke on these, gcc is fine.  Sun CC 3.01 has been
-  tested too.  Visual C++ 6.0 is known to fail on the large diphone
-  database files.  We recommend you use GCC under Cygwin or mingw32
-  instead.
-o GNU Make
-o An audio device isn't required as flite can write its output to 
-  a waveform file. 
+o CMake build system. On windows this can acquired from the installer on their website.
+  Otherwise, your operating systems package manager will be able to acquire it.
+o A compiler compatible cmake. Most compilers are already compatible.
+o An audio device isn't required as flite can write its output to
+  a waveform file.
+
+Build Instructions:
+o Clone the repository
+o cmake -BBuild -H.
+o cmake --build build --config Release
+
+Windows systems may need to specify the generator when generating the build files.
 
 Supported platforms:
 
-We have successfully compiled and run on 
-
-o Various Intel Linux systems (and iPaq Linux), under various versions
-  of GCC (2.7.2 to 4.x)
-o Mac OS X
-o Various Android devices
-o FreeBSD 3.x and 4.x
-o Solaris 5.7, and Solaris 9
-o Windows 2000/XP and later under Cygwin 1.3.5 and later
-o Successfully compiles and runs under 64Bit Linux architectures
-o OSF1 V4.0 (gives an unimportant warning about sizes when compiled cst_val.c)
-
-Previously we supported PalmOS and Windows CE but these seem to be rare
-nowadays so they are no longer actively supported.
-
-Other similar platforms should just work, we have also cross compiled
-on a Linux machine for StrongARM.  However note that new byte order
-architectures may not work directly as there is some careful
-byte order constraints in some structures.  These are portable but may
-require reordering of some fields, contact us if you are moving to
-a new archiecture.
+Cmake version has been tested on:
+o Ubuntu with GCC
+o Windows with Visual studio
 
 News
 ----
@@ -125,7 +111,7 @@ New in 2.0.0 (Dec 2014)
     o simple-Pulseaudio support
     o Improved Android support
     o Removed PalmOS support from distribution
-    o Companion multilingual ebook reader Bard Storyteller 
+    o Companion multilingual ebook reader Bard Storyteller
        http://festvox.org/bard/
 
 New in 1.4.1 (March 2010)
@@ -139,9 +125,9 @@ New in 1.4 (December 2009)
       the kal diphone database
     o CMULEX now uses maximum onset for syllabification
     o alsa support
-    o Clustergen support (including mlpg with mixed excitation) 
+    o Clustergen support (including mlpg with mixed excitation)
       But is still slow on limited processors
-    o Windows support with Visual Studio (specifically for the Olympus 
+    o Windows support with Visual Studio (specifically for the Olympus
         Spoken Dialog System)
     o WinCE support is redone with cegcc/mingw32ce with example
         example TTS app: Flowm: Flite on Windows Mobile
@@ -151,9 +137,9 @@ New in 1.4 (December 2009)
 New in 1.3-release (October 2005)
     o fixes to lpc residual extraction to give better quality output
     o An updated lexicon (festlex_CMU from festival-2.0.95) and better
-      compression its about 30% of the previous size, with about 
+      compression its about 30% of the previous size, with about
       the same accuracy
-    o Fairly substantial code movements to better support PalmOS and 
+    o Fairly substantial code movements to better support PalmOS and
       multi-platform cross compilation builds
     o A PalmOS 5.0 port with an small example talking app ("flop")
     o runs under ix86_64 linux
@@ -174,7 +160,7 @@ In general
 
     tar zxvf flite-2.0.0-release.tar.gz
     cd flite-2.0.0-release
-    ./configure 
+    ./configure
     make
 
 Where tar is gnu tar (gtar), and make is gnu make (gmake).
@@ -220,7 +206,7 @@ wave format often called .WAV).
 Will play the text file doc/alice.  If the first argument contains
 a space it is treated as text otherwise it is treated as a filename.
 If a second argument is given a waveform file is written to it,
-if no argument is given or "play" is given it will attempt to 
+if no argument is given or "play" is given it will attempt to
 write directly to the audio device (if supported).  if "none"
 is given the audio is simply thrown away (used for benchmarking).
 Explicit options are also available.
@@ -247,7 +233,7 @@ debugging.  Some typical examples are
 ./bin/flite --sets join_type=simple_join doc/intro
      Use simple concatenation of diphones without prosodic modification
 ./bin/flite -pw doc/alice
-     Print sentences as they are said 
+     Print sentences as they are said
 ./bin/flite --setf duration_stretch=1.5 doc/alice
      Make it speak slower
 ./bin/flite --setf int_f0_target_mean=145 doc/alice
@@ -258,7 +244,7 @@ http://festvox.org/ldom it requires a single argument HH:MM
 under Unix you can call it
     ./bin/flite_time `date +%H:%M`
 
-./bin/flite -lv 
+./bin/flite -lv
     List the voices linked in directly in this build
 
 ./bin/flite -voice rms -f doc/alice
@@ -299,7 +285,7 @@ included voice is just a sample voice that was used in the testing
 process.  
 
 We expect that often voices will be loaded from external files, and we
-have now set up a voice repository on 
+have now set up a voice repository on
    http://festvox.org/flite/voices/LANG/*.flitevox
 If you visit there with a browser you can hear the examples.  You can
 also download the .flitevox files to you machine so you don't need a
@@ -316,7 +302,3 @@ actually reading them to you using flite.  Bard supports a wide
 range of fonts, and flite voices, and books in text, html and
 epub format.  Bard is used as a evaluation of flites capabilities
 and an example of a serious application using flite.
-
-
-
-
