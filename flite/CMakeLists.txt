@@ -277,12 +277,18 @@ target_include_directories(flite_cmu_us_kal
     PUBLIC lang/usenglish
     PUBLIC lang/cmulex)
 
+target_link_Libraries(flite_cmu_us_kal
+    PUBLIC flite_wavesynth)
+
 add_library(flite_cmu_us_kal16
     lang/cmu_us_kal16/cmu_us_kal16.c
     lang/cmu_us_kal16/cmu_us_kal16_diphone.c
     lang/cmu_us_kal16/cmu_us_kal16_lpc.c
     lang/cmu_us_kal16/cmu_us_kal16_res.c
     lang/cmu_us_kal16/cmu_us_kal16_residx.c)
+
+target_link_libraries(flite_cmu_us_kal16
+    PUBLIC flite_wavesynth)
 
 target_include_directories(flite_cmu_us_kal16
     PUBLIC inc
