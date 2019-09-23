@@ -1,7 +1,17 @@
-project(flite_app CXX C)
-cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
+################################################
+# Project Settings
+################################################
+project(flite_app C CXX)
 set(CMAKE_CXX_STANDARD 17)
 
+################################################
+# Dependencies
+################################################
+#find_package(Boost COMPONENTS program_options REQUIRED)
+
+################################################
+# Targets 
+################################################
 set(S flite_main)
 add_executable(flite_main
     ${S}/flite_main.c

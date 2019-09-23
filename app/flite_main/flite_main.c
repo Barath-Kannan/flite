@@ -109,7 +109,7 @@ static void flite_voice_list_print(void)
     cst_voice *voice;
     const cst_val *v;
 
-    printf("Voices available: ");
+    printf("Voices available: \n");
     for (v=flite_voice_list; v; v=val_cdr(v))
     {
         voice = val_voice(val_car(v));
