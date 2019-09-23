@@ -116,7 +116,7 @@ void cst_synthtilt(const cst_cg_db *cg_db,
     drise= tiltdur*(1+tilttilt)/2;
     dfall= tiltdur*(1-tilttilt)/2;
     num_frames=(int)ceil((double)(start/cg_db->frame_advance));
-    // Synthesizing the rise event
+    /* Synthesizing the rise event */
     for (i=cg_db->frame_advance;((num_frames * cg_db->frame_advance)<(start+(drise/2))) ; num_frames++,i+=cg_db->frame_advance)
     {
         ftrack->frames[num_frames][0]+= peak - arise + (2 * arise * (i/drise) * (i/drise));
@@ -127,7 +127,7 @@ void cst_synthtilt(const cst_cg_db *cg_db,
         ftrack->frames[num_frames][0]+= peak - 2 * arise * (1- (i/drise)) * (1- (i/drise));
         ftrack->frames[num_frames][0]=exp(ftrack->frames[num_frames][0]);
     }
-    // Synthesizing the fall event
+    /* Synthesizing the fall event */
     for (i=cg_db->frame_advance;((num_frames * cg_db->frame_advance)<(start+drise+(dfall/2))) ; num_frames++,i+=cg_db->frame_advance)
     {
         ftrack->frames[num_frames][0]+= peak + afall - (2 * afall * (i/dfall) * (i/dfall)) - afall;

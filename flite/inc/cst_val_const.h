@@ -123,7 +123,7 @@
 #define DEF_CONST_VAL_INT(N,V) const cst_val N = {{.a={.type=CST_VAL_TYPE_INT,.ref_count=-1,.v={.ival=V}}}}
 #define DEF_CONST_VAL_STRING(N,S) const cst_val N = {{.a={.type=CST_VAL_TYPE_STRING,.ref_count=-1,.v={.vval= (void *)S}}}}
 #define DEF_CONST_VAL_FLOAT(N,F) const cst_val N = {{.a={.type=CST_VAL_TYPE_FLOAT,.ref_count=-1,.v={.fval=F}}}}
-#define DEF_CONST_VAL_CONS(N,A,D) const cst_val N = {{.cc={.car=A,.cdr=D }}}
+#define DEF_CONST_VAL_CONS(N,A,D) const cst_val N = {{.cc={.car=(cst_val *)A,.cdr=(cst_val *)D }}}
 
 extern const cst_val val_int_0; 
 extern const cst_val val_int_1; 

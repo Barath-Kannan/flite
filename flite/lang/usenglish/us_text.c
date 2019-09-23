@@ -50,7 +50,7 @@ static cst_val *state_name(const char *name,cst_item *t);
 /* compiled us regexes */
 #include "us_regexes.h"
 
-/* Note you need to also update the wandm regex in make_us_regeses too */
+/* Note you need to also update the wandm regex in make_us_regexes too */
 static const char * const wandm_abbrevs[99][2] =
 {
     { "LB", "pounds" },
@@ -251,7 +251,8 @@ static char *map_unicode_single_quote(const char *name)
 static cst_val *us_tokentowords_one(cst_item *token, const char *name)
 {
     /* Return list of words that expand token/name */
-    char *p, *aaa, *bbb, *ccc;
+    const char *p;
+    char *aaa, *bbb, *ccc, *ppp;
     int i,j,k,l;
     cst_val *r, *s, *ss;
     const cst_val *rr;
@@ -319,7 +320,7 @@ static cst_val *us_tokentowords_one(cst_item *token, const char *name)
     else if (cst_regex_match(cst_rx_commaint,name))
     {   /* 99,999,999 */
 	aaa = cst_strdup(name);
-	for (j=i=0; i < cst_strlen(name); i++)
+	for (j=i=0; i < (signed int)cst_strlen(name); i++)
 	    if (name[i] != ',')
 	    {
 		aaa[j] = name[i];
@@ -398,19 +399,26 @@ static cst_val *us_tokentowords_one(cst_item *token, const char *name)
     else if (cst_regex_match(digits2dash,name))
     {   /* 999-999-999 etc */
 	bbb = cst_strdup(name);
-	for (ss=0,aaa=p=bbb; *p; p++)
+	for (ss=0,ppp=aaa=bbb; *ppp; ppp++)
 	{
-	    if (*p == '-')
+	    if (*ppp == '-')
 	    {
-		*p = '\0';
+                /* skip however many - there are */
+                while ((*ppp != '\0') && (*ppp == '-'))
+                {
+                    *ppp = '\0';
+                    ppp++;
+                }
 		ss = cons_val(string_val(aaa),ss);
-		aaa = p+1;
+		aaa = ppp;
 	    }
 	}
-        ss = cons_val(string_val(aaa),ss);
+        ss = cons_val(string_val(aaa),ss);  /* note the order is now reversed */
         if ((val_length(ss) == 2) &&
             (atoi(val_string(val_car(val_cdr(ss)))) <
-             atoi(val_string(val_car(ss)))))  /* its a number range */
+             atoi(val_string(val_car(ss)))) &&  /* small to large */
+            (abs(cst_strlen(val_string(val_car(val_cdr(ss)))) -
+                 cst_strlen(val_string(val_car(ss)))) < 2)) /* not too diff */
         {
             /* Should get 22-23 November, or 1998-1999 right */
             r = 
@@ -430,6 +438,10 @@ static cst_val *us_tokentowords_one(cst_item *token, const char *name)
         }
         delete_val(ss);
 	cst_free(bbb);
+    }
+    else if (cst_regex_match(leadingzerodigits,name))
+    {   /* a leading zero and digits */
+        r = en_exp_digits(name);
     }
     else if (cst_regex_match(cst_rx_digits,name))
     {   /* string of digits (use cart to disambiguate) */
@@ -666,8 +678,8 @@ static cst_val *us_tokentowords_one(cst_item *token, const char *name)
     {   /* 60s and 7s and 9s */
 	aaa = cst_strdup(name);
 	aaa[cst_strlen(name)-1] = '\0';
-	r = val_append(us_tokentowords_one(token,aaa),
-		       cons_val(string_val("'s"),0));
+        r = val_append(us_tokentowords_one(token,aaa),
+                       cons_val(string_val("'s"),0));
 	cst_free(aaa);
     }
     else if (contains_unicode_single_quote(name))
@@ -807,7 +819,8 @@ static cst_val *us_tokentowords_one(cst_item *token, const char *name)
     }
     else if ((cst_strlen(name) > 1) && 
 	     (cst_regex_match(cst_rx_alpha,name)) &&
-             (!in_lex(lex,name,NULL,NULL)) &&  // AUP: Added 4th argument (voice feats) as NULL, needs to be revisited later.
+             /* AUP: Added 4th argument (voice feats) as NULL, needs to be revisited later. */
+             (!in_lex(lex,name,NULL,NULL)) &&  
 	     (!us_aswd(name)))
         /* Still not quiet right, if there is a user_lex we need to check */
         /* it too -- but user_lex isn't user setable yet */

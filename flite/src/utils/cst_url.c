@@ -61,8 +61,9 @@ int cst_urlp(const char *url)
 {
     /* Return 1 if url is a url, 0 otherwise */
     /* This is decided by the initial substring being "http:" or "file:" */
-    if (cst_streqn("http:",url,5) ||
-        cst_streqn("file:",url,5))
+    if ((cst_strlen(url) > 4) &&
+        (cst_streqn("http:",url,5) ||
+         cst_streqn("file:",url,5)))
         return TRUE;
     else
         return FALSE;

@@ -120,18 +120,18 @@ typedef struct _DWin {
 } DWin;
 
 typedef struct _PStreamChol {
-    int vSize;		// size of ovserved vector
-    int order;		// order of cepstrum
-    int T;		// number of frames
-    int width;		// width of WSW
+    int vSize;		/* size of ovserved vector */
+    int order;		/* order of cepstrum */
+    int T;		/* number of frames */
+    int width;		/* width of WSW */
     DWin dw;
-    double **mseq;	// sequence of mean vector
-    double **ivseq;	// sequence of invarsed covariance vector
-    double ***ifvseq;	// sequence of invarsed full covariance vector
-    double **R;		// WSW[T][range]
-    double *r;		// WSM [T]
-    double *g;		// g [T]
-    double **c;		// parameter c
+    double **mseq;	/* sequence of mean vector */
+    double **ivseq;	/* sequence of invarsed covariance vector */
+    double ***ifvseq;	/* sequence of invarsed full covariance vector */
+    double **R;		/* WSW[T][range] */
+    double *r;		/* WSM [T] */
+    double *g;		/* g [T] */
+    double **c;		/* parameter c */
 } PStreamChol;
 
 
@@ -215,27 +215,27 @@ static void calc_vargrad(PStreamChol *pst, const int m, double alpha, double n,
 			 double vm, double vv);
 static double get_gauss_dia5(double det,
 		     double weight,
-		     DVECTOR vec,		// dim
-		     DVECTOR meanvec,		// dim
-                      DVECTOR invcovvec);		// dim
+                             DVECTOR vec,		/* dim */
+                             DVECTOR meanvec,		/* dim */
+                             DVECTOR invcovvec);	/* dim */
 #endif
 
 static double get_gauss_full(long clsidx,
-		      DVECTOR vec,		// [dim]
-		      DVECTOR detvec,		// [clsnum]
-		      DMATRIX weightmat,	// [clsnum][1]
-		      DMATRIX meanvec,		// [clsnum][dim]
-		      DMATRIX invcovmat);	// [clsnum * dim][dim]
+                             DVECTOR vec,		/* [dim] */
+                             DVECTOR detvec,		/* [clsnum] */
+                             DMATRIX weightmat,	        /* [clsnum][1] */
+                             DMATRIX meanvec,		/* [clsnum][dim] */
+                             DMATRIX invcovmat);	/* [clsnum * dim][dim] */
 static double get_gauss_dia(long clsidx,
-		     DVECTOR vec,		// [dim]
-		     DVECTOR detvec,		// [clsnum]
-		     DMATRIX weightmat,		// [clsnum][1]
-		     DMATRIX meanmat,		// [clsnum][dim]
-		     DMATRIX invcovmat);	// [clsnum][dim]
+                            DVECTOR vec,		/* [dim] */
+                            DVECTOR detvec,		/* [clsnum] */
+                            DMATRIX weightmat,		/* [clsnum][1] */
+                            DMATRIX meanmat,		/* [clsnum][dim] */
+                            DMATRIX invcovmat);	        /* [clsnum][dim] */
 static double cal_xmcxmc(long clsidx,
 		  DVECTOR x,
-		  DMATRIX mm,	// [num class][dim]
-		  DMATRIX cm);	// [num class * dim][dim]
+                         DMATRIX mm,	/* [num class][dim] */
+                         DMATRIX cm);	/* [num class * dim][dim] */
 
 #if 0
 static void get_gv_mlpgpara(MLPGPARA param, char *vmfile, char *vvfile,

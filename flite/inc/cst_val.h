@@ -149,7 +149,7 @@ void val_print(cst_file fd,const cst_val *v);
 cst_val *val_readlist_string(const char *str);
 
 cst_val *val_reverse(cst_val *v);
-cst_val *val_append(cst_val *a,cst_val *b);
+cst_val *val_append(cst_val *a,cst_val *b); /* destructive */
 int val_length(const cst_val *l);
 cst_val *cst_utf8_explode(const cst_string *utf8string);
 cst_string *cst_implode(const cst_val *string_list);

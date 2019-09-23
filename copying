@@ -12,7 +12,7 @@ non-conflicting licence, see below.
 
                   Language Technologies Institute                      
                      Carnegie Mellon University                        
-                      Copyright (c) 1999-2014                          
+                      Copyright (c) 1999-2017                          
                         All Rights Reserved.                           
                                                                        
   Permission is hereby granted, free of charge, to use and distribute  
@@ -94,10 +94,12 @@ src/utils/cst_mmap_posix.c
 src/utils/cst_mmap_win32.c
 src/utils/cst_mmap_none.c
 src/utils/cst_file_wince.c
-sapi/
+sapi/ (non-CG)
       are copyright Cepstral, LLC rather than CMU but fall under the same
-      free licence as the above, except for the owner. (Note the SAPI stuff
-      probably doesn't work any more)
+      free licence as the above, except for the owner.
+sapi/ CG support
+      are copyright Cobalt, LLC rather than CMU but fall under the same
+      free licence as the above, except for the owner.
 
 doc/alice
    Is the first two chapters of Alice in Wonderland as distributed by the

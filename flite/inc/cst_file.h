@@ -86,6 +86,7 @@ typedef struct cst_filemap_struct {
 #define CST_OPEN_WRITE (1<<0)
 #define CST_OPEN_READ (1<<1)
 #define CST_OPEN_APPEND (1<<2)
+/* We actually ignore this -- files are always opened in in binary mode */
 #define CST_OPEN_BINARY (1<<3)
 
 #define CST_SEEK_ABSOLUTE 0
@@ -97,6 +98,31 @@ long cst_fwrite(cst_file fh, const void *buf, long size, long count);
 long cst_fread(cst_file fh, void *buf, long size, long count);
 int cst_fprintf(cst_file fh, const char *fmt, ...);
 int cst_sprintf(char *s, const char *fmt, ...);
+#ifdef _WIN32
+#define snprintf c99_snprintf
+
+__inline int c99_vsnprintf(char* str, size_t size, const char* format,
+va_list ap)  {
+       int count = -1;
+       if (size != 0)
+           count = _vsnprintf_s(str, size, _TRUNCATE, format, ap);
+       if (count == -1)
+           count = _vscprintf(format, ap);
+       return count;
+   }
+__inline int c99_snprintf(char* str, size_t size, const char* format, ...)
+{
+       int count;
+       va_list ap;
+
+       va_start(ap, format);
+       count = c99_vsnprintf(str, size, format, ap);
+       va_end(ap);
+       return count;
+   }
+#endif
+#define cst_snprintf snprintf
+
 #if defined(__palmos__)
 #include <stdarg.h>
 int cst_vsprintf(char *s, const char *fmt, va_list args);

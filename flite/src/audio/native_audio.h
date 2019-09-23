@@ -52,6 +52,17 @@
 
 #endif
 
+#ifdef CST_AUDIO_SUNOS
+
+#define AUDIO_OPEN_NATIVE audio_open_sun
+#define AUDIO_CLOSE_NATIVE audio_close_sun
+#define AUDIO_SET_SAMPLE_RATE_NATIVE audio_set_sample_rate_sun
+#define AUDIO_WRITE_NATIVE audio_write_sun
+#define AUDIO_DRAIN_NATIVE audio_drain_sun
+#define AUDIO_FLUSH_NATIVE audio_flush_sun
+
+#endif
+
 #ifdef CST_AUDIO_LINUX
 
 #define AUDIO_OPEN_NATIVE audio_open_oss
@@ -108,12 +119,23 @@
 #endif
 
 #ifdef CST_AUDIO_WIN32
-#define AUDIO_OPEN_NATIVE audio_open_wince
-#define AUDIO_CLOSE_NATIVE audio_close_wince
-#define AUDIO_SET_SAMPLE_RATE_NATIVE audio_set_sample_rate_wince
-#define AUDIO_WRITE_NATIVE audio_write_wince
-#define AUDIO_DRAIN_NATIVE audio_drain_wince
-#define AUDIO_FLUSH_NATIVE audio_flush_wince
+#define AUDIO_OPEN_NATIVE audio_open_win
+#define AUDIO_CLOSE_NATIVE audio_close_win
+#define AUDIO_SET_SAMPLE_RATE_NATIVE audio_set_sample_rate_win
+#define AUDIO_WRITE_NATIVE audio_write_win
+#define AUDIO_DRAIN_NATIVE audio_drain_win
+#define AUDIO_FLUSH_NATIVE audio_flush_win
+
+#endif
+
+#ifdef CST_AUDIO_PALMOS
+
+#define AUDIO_OPEN_NATIVE audio_open_palmos
+#define AUDIO_CLOSE_NATIVE audio_close_palmos
+#define AUDIO_SET_SAMPLE_RATE_NATIVE audio_set_sample_rate_palmos
+#define AUDIO_WRITE_NATIVE audio_write_palmos
+#define AUDIO_DRAIN_NATIVE audio_drain_palmos
+#define AUDIO_FLUSH_NATIVE audio_flush_palmos
 
 #endif
 

@@ -1,7 +1,7 @@
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
 project(flite CXX C)
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 if(${WIN32})
     set(flite_audio_driver_src src/audio/au_wince.c)
@@ -356,34 +356,3 @@ target_include_directories(flite_usenglish
 
 target_link_libraries(flite_usenglish
     PUBLIC flite_utils)
-
-add_executable(flite_main
-    src/main/flite_main.c
-    src/main/flite_lang_list.c
-    src/main/flite_voice_list.c)
-
-target_include_directories(flite_main
-    PUBLIC inc)
-
-target_link_libraries(flite_main
-    PUBLIC flite_audio
-    PUBLIC flite_hrg
-    PUBLIC flite_regex
-    PUBLIC flite_stats
-    PUBLIC flite_utils
-    PUBLIC flite_cg
-    PUBLIC flite_lexicon
-    PUBLIC flite_speech
-    PUBLIC flite_synth
-    PUBLIC flite_wavesynth
-    PUBLIC flite_cmu_grapheme_lang
-    PUBLIC flite_cmu_grapheme_lex
-    PUBLIC flite_cmu_indic_lang
-    PUBLIC flite_cmu_indic_lex
-    PUBLIC flite_cmulex
-    PUBLIC flite_cmu_us_kal
-    PUBLIC flite_cmu_us_kal16
-    PUBLIC flite_cmu_us_slt
-    PUBLIC flite_cmu_us_rms
-    PUBLIC flite_cmu_us_awb
-    PUBLIC flite_usenglish)

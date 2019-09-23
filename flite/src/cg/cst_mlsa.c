@@ -82,12 +82,14 @@ static cst_wave *synthesis_body(const cst_track *params,
                                 const cst_track *str, 
                                 double fs, double framem,
                                 cst_cg_db *cg_db,
-                                cst_audio_streaming_info *asi);
+                                cst_audio_streaming_info *asi,
+                                int mlsa_speed_param);
 
 cst_wave *mlsa_resynthesis(const cst_track *params, 
                            const cst_track *str, 
                            cst_cg_db *cg_db,
-                           cst_audio_streaming_info *asi)
+                           cst_audio_streaming_info *asi,
+                           int mlsa_speed_param)
 {
     /* Resynthesizes a wave from given track */
     cst_wave *wave = 0;
@@ -99,7 +101,7 @@ cst_wave *mlsa_resynthesis(const cst_track *params,
     else
         shift = 5.0;
 
-    wave = synthesis_body(params,str,sr,shift,cg_db,asi);
+    wave = synthesis_body(params,str,sr,shift,cg_db,asi,mlsa_speed_param);
 
     return wave;
 }
@@ -109,7 +111,8 @@ static cst_wave *synthesis_body(const cst_track *params, /* f0 + mcep */
                                 double fs,	/* sampling frequency (Hz) */
                                 double framem,	/* frame size */
                                 cst_cg_db *cg_db,
-                                cst_audio_streaming_info *asi)
+                                cst_audio_streaming_info *asi,
+                                int mlsa_speed_param)
 {
     long t, pos;
     int framel, i;
@@ -123,8 +126,11 @@ static cst_wave *synthesis_body(const cst_track *params, /* f0 + mcep */
     double ffs = fs;
 
     num_mcep = params->num_channels-1;
-    /* For SPEED_HACK we could reduce num_mcep, and it will run faster */
-    /* num_mcep -= 10; */
+    if ((num_mcep > mlsa_speed_param) &&
+        ((num_mcep - mlsa_speed_param) > 4))
+        /* Basically ignore some of the higher coeffs */
+        /* It'll sound worse, but it will be faster */
+        num_mcep -= mlsa_speed_param;
     framel = (int)(0.5 + (framem * ffs / 1000.0)); /* 80 for 16KHz */
     init_vocoder(ffs, framel, num_mcep, &vs, cg_db);
 
@@ -217,7 +223,7 @@ static void init_vocoder(double fs, int framel, int m,
     vs->d  = NULL;
     vs->irleng= 64;
    
-    // for MIXED EXCITATION
+    /* for MIXED EXCITATION */
     vs->ME_order = cg_db->ME_order;
     vs->ME_num = cg_db->ME_num;
     vs->hpulse = cst_alloc(double,vs->ME_order);
@@ -281,7 +287,7 @@ static void vocoder(double p, double *mc,
 	vs->d1   = vs->cinc + m + 1;
 
 	mc2b(mc, vs->c, m, cg_db->mlsa_alpha);
-      
+
 	if (cg_db->mlsa_beta > 0.0 && m > 1) {
 	    e1 = b2en(vs->c, m, cg_db->mlsa_alpha, vs);
 	    vs->c[1] -= cg_db->mlsa_beta * cg_db->mlsa_alpha * mc[2];
@@ -295,6 +301,7 @@ static void vocoder(double p, double *mc,
     }
 
     mc2b(mc, vs->cc, m, cg_db->mlsa_alpha); 
+
     if (cg_db->mlsa_beta>0.0 && m > 1) {
 	e1 = b2en(vs->cc, m, cg_db->mlsa_alpha, vs);
 	vs->cc[1] -= cg_db->mlsa_beta * cg_db->mlsa_alpha * mc[2];
@@ -422,10 +429,8 @@ static double mlsadf1(double x, double *b, int m, double a, int pd, double *d, V
 static double mlsadf2 (double x, double *b, int m, double a, int pd, double *d, VocoderSetup *vs)
 {
   double v, out = 0.0, *pt;
-  //  double aa;
   register int i;
     
-  //aa = 1 - a*a;
    pt = &d[pd * (m+2)];
 
    for (i=pd; i>=1; i--) {

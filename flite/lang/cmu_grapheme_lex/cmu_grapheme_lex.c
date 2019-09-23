@@ -89,8 +89,11 @@ cst_val *cmu_grapheme_lex_lts_function(const struct lexicon_struct *l,
         /* afterwards */
         cst_utf8_as_hex(val_string(val_car(v)),ord);
         phindex = cst_find_u2sampa(ord);
+        printf("awb_debug lookup sampa %s %s\n",val_string(val_car(v)),ord);
+#if 0        
         if (phindex < 0)
             printf("awb_debug no sampa %s %s\n",val_string(val_car(v)),ord);
+#endif        
         for (i=4; (phindex>=0) && (i>0); i--)
         {
             if (unicode_sampa_mapping[phindex][i])
@@ -100,7 +103,7 @@ cst_val *cmu_grapheme_lex_lts_function(const struct lexicon_struct *l,
     }
 
     phones = val_reverse(phones);
-#if 1
+#if 0
     printf("cmu_grapheme_lex.c: word \"%s\" ",word);
     val_print(stdout,phones);
     printf("\n");
@@ -193,7 +196,7 @@ cst_lexicon *cmu_grapheme_lex_init(void)
         return &cmu_grapheme_lex;
 
     l = &cmu_grapheme_lex;
-    l->name = "cmu_grapheme_lex";
+    l->name = cst_strdup("cmu_grapheme_lex");
 
     l->lts_function = cmu_grapheme_lex_lts_function;
     l->syl_boundary = cmu_grapheme_syl_boundary;

@@ -62,9 +62,12 @@ cst_file cst_fopen(const char *path, int mode)
     else if (mode & CST_OPEN_READ)
 	strcpy(cmode, "r");
 
-    if (mode & CST_OPEN_BINARY)
-	strcat(cmode, "b");
-
+    /* Windows likes to make a distinction between binary and not */
+    /* While other operating systems do not -- we're going to always */
+    /* treat files as binary, because the non-binary Windows case is */
+    /* never what we want */
+    strcat(cmode, "b");
+      
     return fopen(path, cmode);
 }
 

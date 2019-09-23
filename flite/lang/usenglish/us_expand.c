@@ -133,7 +133,7 @@ cst_val *en_exp_number(const char *numstring)
 	{
 	    if (numstring[1] == '0')
 		return 0;
-	    else
+            else 
 		return cons_val(string_val(digit2num[numstring[1]-'0']),0);
 	}
 	else if (numstring[1] == '0')
@@ -206,7 +206,7 @@ cst_val *en_exp_ordinal(const char *rawnumstring)
     int i,j;
 
     numstring = cst_strdup(rawnumstring);
-    for (j=i=0; i < cst_strlen(rawnumstring); i++)
+    for (j=i=0; i < (signed int)cst_strlen(rawnumstring); i++)
 	if (rawnumstring[i] != ',')
 	{
 	    numstring[j] = rawnumstring[i];
@@ -214,6 +214,8 @@ cst_val *en_exp_ordinal(const char *rawnumstring)
 	}
     numstring[j] = '\0';
     card = val_reverse(en_exp_number(numstring));
+    if (!card)
+        card = cons_val(string_val("zero"),0);
     cst_free(numstring);
 
     l = val_string(val_car(card));
@@ -299,7 +301,8 @@ cst_val *en_exp_id(const char *numstring)
 
 cst_val *en_exp_real(const char *numstring)
 {
-    char *aaa, *p;
+    char *aaa;
+    const char *p;
     cst_val *r;
 
     if (numstring && (numstring[0] == '-'))

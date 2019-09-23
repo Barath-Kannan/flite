@@ -46,12 +46,16 @@
 #include "cst_error.h"
 #include "cst_alloc.h"
 
+
 #ifdef __QNXNTO__
 #include <sys/syspage.h>
-#define getpagesize() (SYSPAGE_ENTRY( system_private )->pagesize)
+#define getpagesize() (SYSPAGE_ENTRY( system_private )->PAGE_SIZE)
+// #define getpagesize() (sysconf(_SC_PAGESIZE))
 #else
 #define MAP_NOSYNCFILE 0
 #endif
+// #define __page_size PAGE_SIZE
+
 
 cst_filemap *cst_mmap_file(const char *path)
 {
@@ -59,8 +63,11 @@ cst_filemap *cst_mmap_file(const char *path)
     size_t pgsize;
     struct stat buf;
     int fd;
+    // unsigned int __page_size = PAGE_SIZE;
 
-    pgsize = getpagesize();
+
+     pgsize = getpagesize();
+    // pgsize = PAGE_SIZE;
 
     if ((fd = open(path, O_RDONLY)) < 0) {
 	perror("cst_mmap_file: Failed to open file");
@@ -116,9 +123,9 @@ cst_filemap *cst_read_whole_file(const char *path)
     fmap->fd = fd;
     fmap->mapsize = buf.st_size;
     fmap->mem = cst_alloc(char, fmap->mapsize);
-    if (read(fmap->fd, fmap->mem, fmap->mapsize) < fmap->mapsize)
+    if ((int)read(fmap->fd, fmap->mem, fmap->mapsize) < (int)fmap->mapsize)
     {
-	perror("cst_read_whole_fiel: read() failed");
+	perror("cst_read_whole_file: read() failed");
 	close(fmap->fd);
 	cst_free(fmap->mem);
 	cst_free(fmap);

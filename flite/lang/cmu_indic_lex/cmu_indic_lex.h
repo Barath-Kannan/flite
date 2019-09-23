@@ -54,7 +54,8 @@ extern "C" {
     IND_HALANT,
     IND_DIGIT,
     IND_PUNC,
-    IND_IGNORE
+    IND_IGNORE,
+    IND_ADDAK
   };
 
   struct cmu_indic_char {

@@ -47,6 +47,7 @@ $COMPILE_REGEX illion ".*illion"
 $COMPILE_REGEX romannums "\\(II?I?\\|IV\\|VI?I?I?\\|IX\\|X[VIX]*\\)"
 $COMPILE_REGEX drst "\\([dD][Rr]\\|[Ss][tT]\\)"
 $COMPILE_REGEX numess "[0-9]+s"
+$COMPILE_REGEX leadingzerodigits "0[0-9]+"
 $COMPILE_REGEX sevenphonenumber "[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]"
 $COMPILE_REGEX fourdigits "[0-9][0-9][0-9][0-9]"
 $COMPILE_REGEX threedigits "[0-9][0-9][0-9]"
@@ -54,8 +55,10 @@ $COMPILE_REGEX numbertime "[0-9]?[0-9]:[0-5][0-9]"
 $COMPILE_REGEX numbertimexm "[0-9]?[0-9][:\\.][0-5][0-9][ap]m"
 $COMPILE_REGEX dottedabbrevs "\\([A-Za-z]\\.\\)+[A-Za-z]\\.?"
 $COMPILE_REGEX digitsslashdigits "[0-9]+/[0-9]+"
-$COMPILE_REGEX digits2dash "\\([0-9]+-.\\)+[0-9]+"
+$COMPILE_REGEX digits2dash "\\([0-9]+-+\\)+[0-9]+"
 $COMPILE_REGEX wandm "[0-9,]*[0-9]+\\(lb\\|LB\\|lbs\\|LBS\\|ft\\|FT\\|kg\\|km\\|oz\\|hz\\|Hz\\|HZ\\|KHz\\|MHz\\|GHz\\|cm\\|mm\\|ml\\|KB\\|MB\\|GB\\|TB\\)"
+
+
 
 exit 0
 

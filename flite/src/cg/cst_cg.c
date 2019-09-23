@@ -2,7 +2,7 @@
 /*                                                                       */
 /*                  Language Technologies Institute                      */
 /*                     Carnegie Mellon University                        */
-/*                         Copyright (c) 2007                            */
+/*                     Copyright (c) 2007-2017                           */
 /*                        All Rights Reserved.                           */
 /*                                                                       */
 /*  Permission is hereby granted, free of charge, to use and distribute  */
@@ -77,8 +77,12 @@ void delete_cg_db(cst_cg_db *db)
         cst_free((void *)db->types[i]);
     cst_free((void *)db->types);
 
-    for (i=0; db->f0_trees && db->f0_trees[i]; i++)
-        delete_cart((cst_cart *)(void *)db->f0_trees[i]);
+    for (j=0; j<db->num_f0_models; j++)
+    {
+        for (i=0; db->f0_trees[j] && db->f0_trees[j][i]; i++)
+            delete_cart((cst_cart *)(void *)db->f0_trees[j][i]);
+        cst_free((void *)db->f0_trees[j]);
+    }
     cst_free((void *)db->f0_trees);
 
     for (j=0; j<db->num_param_models; j++)
@@ -104,12 +108,25 @@ void delete_cg_db(cst_cg_db *db)
             cst_free((void *)db->model_vectors[j][i]);
         cst_free((void *)db->model_vectors[j]);
     }
-    cst_free(db->num_channels);
-    cst_free(db->num_frames);
-    cst_free((void *)db->model_vectors);
 
     cst_free((void *)db->model_min);
     cst_free((void *)db->model_range);
+
+    if (db->model_shape != CST_CG_MODEL_SHAPE_BASE_MINRANGE)
+    {
+        for (j = 0; j<db->num_param_models; j++)
+        {
+            for (i=0; i<db->num_channels[j]; i++)
+                cst_free((void *)db->qtable[j][i]);
+            cst_free((void *)db->qtable[j]);
+        }
+    }
+    cst_free((void *)db->qtable);
+
+    /* Moved to here so they can be used for the model_shape freeing */
+    cst_free(db->num_channels);
+    cst_free(db->num_frames);
+    cst_free((void *)db->model_vectors);
 
     for (j = 0; j<db->num_dur_models; j++)
     {
@@ -119,7 +136,7 @@ void delete_cg_db(cst_cg_db *db)
             cst_free((void *)db->dur_stats[j][i]);
         }
         cst_free((void *)db->dur_stats[j]);
-        delete_cart((void *)db->dur_cart[j]);
+        delete_cart((cst_cart *)(void *)db->dur_cart[j]);
     }
     cst_free((void *)db->dur_stats);
     cst_free((void *)db->dur_cart);
@@ -350,6 +367,8 @@ static void cg_F0_interpolate_spline(cst_utterance *utt,
         start_index = ffeature_int(syl,"R:SylStructure.daughter1.R:segstate.daughter1.R:mcep_link.daughter1.frame_number");
         end_index = ffeature_int(syl,"R:SylStructure.daughtern.R:segstate.daughtern.R:mcep_link.daughtern.frame_number");
         mid_index = (int)((start_index + end_index)/2.0);
+        if (end_index <= start_index)
+            continue;
         
         start_f0 = param_track->frames[start_index][0];
         if (end_f0 > 0.0)
@@ -436,7 +455,16 @@ static void cg_smooth_F0(cst_utterance *utt,
     mean *= get_param_float(utt->features,"f0_shift", 1.0);
     stddev = 
         get_param_float(utt->features,"int_f0_target_stddev", cg_db->f0_stddev);
-    
+#if 0
+    FILE *ftt; int ii;
+    ftt = cst_fopen("awb.f0",CST_OPEN_WRITE);
+    printf("awb_debug saving F0\n");
+    for (ii=0; ii<param_track->num_frames; ii++)
+        cst_fprintf(ftt,"%f %f\n",param_track->frames[ii][0],
+                    param_track->frames[ii][param_track->num_channels-2]);
+    cst_fclose(ftt);
+#endif
+
     for (i=0,mcep=utt_rel_head(utt,"mcep"); mcep; i++,mcep=item_next(mcep))
     {
         if (voiced_frame(mcep))
@@ -458,6 +486,82 @@ static void cg_smooth_F0(cst_utterance *utt,
     return;
 }
 
+static int unpack_model_vector(cst_cg_db *cg_db,int pm,int f,float *v)
+{
+    /* This unpacked the potentially compressed/quantized data from the model */
+    int i,j;
+
+    if (cg_db->model_shape == CST_CG_MODEL_SHAPE_QUANTIZED_PARAMS)
+    {
+        for (i=0; i<cg_db->num_channels[pm]/2; i++)
+        {
+            v[i*2] = cg_db->qtable[pm][i*2][cg_db->model_vectors[pm][f][i]/256];
+            v[(i*2)+1] =
+                cg_db->qtable[pm][(i*2)+1][cg_db->model_vectors[pm][f][i]%256];
+        }
+#if 0
+        printf("awb_debug %d\n",f);
+        for (i=0; i<cg_db->num_channels[pm]; i++)
+            printf("%f ",v[i]);
+        printf("\n");
+        for (i=0; i<cg_db->num_channels[pm]/2; i++)
+            printf("%d %d ",cg_db->model_vectors[pm][f][i]/256,
+                   cg_db->model_vectors[pm][f][i]%256);
+        printf("\n");
+#endif
+        return 0;
+    }
+    if (cg_db->model_shape == CST_CG_MODEL_SHAPE_QUANTIZED_PARAMS_41)
+    {
+        j=1; /* skip F0 mean/stddev */
+        for (i=0; i<25; i++,j++)        /* mcep static mean/stddev */
+        {
+            v[j*2] = cg_db->qtable[pm][j*2][cg_db->model_vectors[pm][f][i]/256];
+            v[(j*2)+1] =
+                cg_db->qtable[pm][(j*2)+1][cg_db->model_vectors[pm][f][i]%256];
+        }
+        for (i=25; i<25+12; i+=1,j+=2)  /* mcep deltas no mean/stddev */
+        {
+            v[(j*2)+1] = cg_db->qtable[pm][(j*2)+1][cg_db->model_vectors[pm][f][i]/256];
+            v[(j*2)+3] =
+                cg_db->qtable[pm][(j*2)+3][cg_db->model_vectors[pm][f][i]%256];
+        }
+        /* one delta, one me */
+        v[(j*2)+1] = cg_db->qtable[pm][(j*2)+1][cg_db->model_vectors[pm][f][i]/256];
+        v[(j*2)+2] = cg_db->qtable[pm][(j*2)+2][cg_db->model_vectors[pm][f][i]%256];
+        i++; j+=2;
+        /* one me, another me */
+        v[(j*2)] = cg_db->qtable[pm][j*2][cg_db->model_vectors[pm][f][i]/256];
+        v[(j*2)+2] = cg_db->qtable[pm][(j*2)+2][cg_db->model_vectors[pm][f][i]%256];
+        i++; j+=2;
+        /* one me, another me */
+        v[(j*2)] = cg_db->qtable[pm][j*2][cg_db->model_vectors[pm][f][i]/256];
+        v[(j*2)+2] = cg_db->qtable[pm][(j*2)+2][cg_db->model_vectors[pm][f][i]%256];
+        i++; j+=2;
+        /* one voicing and another v-stddef */
+        v[(j*2)] = cg_db->qtable[pm][j*2][cg_db->model_vectors[pm][f][i]/256];
+        v[(j*2)+1] = cg_db->qtable[pm][(j*2)+1][cg_db->model_vectors[pm][f][i]%256];
+#if 0
+        printf("awb_debug pm %d frame %d\n",pm,f);
+        for (i=0; i<cg_db->num_channels[pm]; i++)
+            printf("%f ",v[i]);
+        printf("\n");
+#endif
+        return 0;
+    }
+    /* if (cg_db->model_shape == CST_CG_MODEL_SHAPE_BASE_MINRANGE) */
+    else /* let's always do this second one in case model_shape isn't set */
+    {
+        for (i=0; i<cg_db->num_channels[pm]; i++)
+        {
+            v[i] = cg_db->model_min[i]+
+                ((float)((cg_db->model_vectors[pm][f][i])/
+                         65535.0)*cg_db->model_range[i]);
+        }
+        return 0;
+    }
+}
+
 static cst_utterance *cg_predict_params(cst_utterance *utt)
 {
     cst_cg_db *cg_db;
@@ -467,7 +571,8 @@ static cst_utterance *cg_predict_params(cst_utterance *utt)
     const cst_cart *mcep_tree, *f0_tree;
     int i,j,f,p,o,pm;
     const char *mname;
-    float f0_val;
+    float *unpacked_vector;
+    float f0_val, f0_bit;
     float local_gain, voicing;
     int fff;
     int extra_feats = 0;
@@ -493,6 +598,7 @@ static cst_utterance *cg_predict_params(cst_utterance *utt)
                      utt_feat_int(utt,"param_track_num_frames"),
                      (cg_db->num_channels[0]/fff)-
                        (2 * extra_feats));/* no voicing or str */
+    unpacked_vector = cst_alloc(float,cg_db->num_channels[0]);
     f = 0;
     for (i=0,mcep=utt_rel_head(utt,"mcep"); mcep; i++,mcep=item_next(mcep))
     {
@@ -506,9 +612,15 @@ static cst_utterance *cg_predict_params(cst_utterance *utt)
             p=0; /* if there isn't a matching tree, use the first one */
 
         /* Predict F0 */
-        f0_tree = cg_db->f0_trees[p];
-        f0_val = val_float(cart_interpret(mcep,f0_tree));
-        param_track->frames[i][0] = f0_val;
+        for (f0_val=pm=0; pm<cg_db->num_f0_models; pm++)
+        {
+            f0_tree = cg_db->f0_trees[pm][p];
+            f0_bit = val_float(cart_interpret(mcep,f0_tree));
+            f0_val += f0_bit;
+        }
+        param_track->frames[i][0] = f0_val/cg_db->num_f0_models;
+        if (param_track->frames[i][0] < 50.0)
+            param_track->frames[i][0] = 0.0;
         /* what about stddev ? */
 
         /* We only have multiple models now, but the default is one model */
@@ -522,13 +634,16 @@ static cst_utterance *cg_predict_params(cst_utterance *utt)
             /* multiple models this will be the nth model */
             item_set_int(mcep,"clustergen_param_frame",f);
 
+            /* Unpack the model[pm][f] vector */
+            unpack_model_vector(cg_db,pm,f,unpacked_vector);
+
             /* Old code used to average in param[0] with F0 too (???) */
 
             for (j=2; j<param_track->num_channels; j++)
             {
                 if (pm == 0) param_track->frames[i][j] = 0.0;
-                param_track->frames[i][j] +=
-                    CG_MODEL_VECTOR(cg_db,model_vectors[pm],f,(j)*fff)/
+                param_track->frames[i][j] += unpacked_vector[j*fff]/
+
                     (float)cg_db->num_param_models;
             }
 
@@ -539,17 +654,14 @@ static cst_utterance *cg_predict_params(cst_utterance *utt)
                 {
                     if (pm == 0) str_track->frames[i][j] = 0.0;
                     str_track->frames[i][j] +=
-                        CG_MODEL_VECTOR(cg_db,model_vectors[pm],f,
-                                        (o+(2*j))*fff) /
+                        unpacked_vector[(o+(2*j))*fff] /
                         (float)cg_db->num_param_models;
                 }
             }
 
             /* last coefficient is average voicing for cluster */
             voicing /= (float)(pm+1);
-            voicing +=
-                CG_MODEL_VECTOR(cg_db,model_vectors[pm],f,
-                                cg_db->num_channels[pm]-2) / 
+            voicing += unpacked_vector[cg_db->num_channels[pm]-2] / 
                 (float)(pm+1);
         }
         item_set_float(mcep,"voicing",voicing);
@@ -559,6 +671,7 @@ static cst_utterance *cg_predict_params(cst_utterance *utt)
         param_track->times[i] = i * cg_db->frame_advance;
     }
 
+    cst_free(unpacked_vector);
     cg_smooth_F0(utt,cg_db,param_track);
 
     utt_set_feat(utt,"param_track",track_val(param_track));
@@ -577,6 +690,7 @@ static cst_utterance *cg_resynth(cst_utterance *utt)
     cst_track *smoothed_track;
     const cst_val *streaming_info_val;
     cst_audio_streaming_info *asi = NULL;
+    int mlsa_speed_param = 0;
 
     streaming_info_val=get_param_val(utt->features,"streaming_info",NULL);
     if (streaming_info_val)
@@ -584,6 +698,11 @@ static cst_utterance *cg_resynth(cst_utterance *utt)
         asi = val_audio_streaming_info(streaming_info_val);
         asi->utt = utt;
     }
+    /* Values 5-15 might be reasonably to speed things up.  This number */
+    /* is used to reduce the number of parameters used in the mceps      */
+    /* e.g. value 10 will speed up from 21.0 faster than real time       */
+    /* to 26.4 times faster than real time (for builtin rms) */
+    mlsa_speed_param = get_param_int(utt->features,"mlsa_speed_param",0);
 
     cg_db = val_cg_db(utt_feat_val(utt,"cg_db"));
     param_track = val_track(utt_feat_val(utt,"param_track"));
@@ -593,11 +712,13 @@ static cst_utterance *cg_resynth(cst_utterance *utt)
     if (cg_db->do_mlpg)
     {
         smoothed_track = mlpg(param_track, cg_db);
-        w = mlsa_resynthesis(smoothed_track,str_track,cg_db,asi);
+        w = mlsa_resynthesis(smoothed_track,str_track,cg_db,
+                             asi,mlsa_speed_param);
         delete_track(smoothed_track);
     }
     else
-        w=mlsa_resynthesis(param_track,str_track,cg_db,asi);
+        w=mlsa_resynthesis(param_track,str_track,cg_db,
+                           asi,mlsa_speed_param);
 
     if (w == NULL)
     {
@@ -615,7 +736,6 @@ static cst_utterance *cg_resynth(cst_utterance *utt)
 
     }
 #endif
-    
 
     utt_set_wave(utt,w);
 

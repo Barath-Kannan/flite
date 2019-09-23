@@ -63,7 +63,7 @@ void delete_phoneset(const cst_phoneset *v)
             cst_free((void *)v->featnames[i]);
         cst_free((void *)v->featnames);
         for (i=0; v->featvals[i]; i++)
-            delete_val((void *)v->featvals[i]);
+            delete_val((cst_val *)(void *)v->featvals[i]);
         cst_free((void *)v->featvals);
         for (i=0; v->phonenames[i]; i++)
             cst_free((void *)v->phonenames[i]);

@@ -65,8 +65,15 @@ extern "C" {
 #include "cst_units.h"
 #include "cst_tokenstream.h"
 
-extern cst_val *flite_voice_list;
-extern cst_lang flite_lang_list[20];
+#ifdef WIN32
+/* For Visual Studio 2012 global variable definitions */
+#define GLOBALVARDEF __declspec(dllexport)
+#else
+#define GLOBALVARDEF
+#endif
+ extern GLOBALVARDEF cst_val *flite_voice_list;
+ extern GLOBALVARDEF cst_lang flite_lang_list[20];
+ extern GLOBALVARDEF int flite_lang_list_length;
 
 /* Public functions */
 int flite_init();

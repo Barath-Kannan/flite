@@ -7387,7 +7387,7 @@ const cst_cart cmu_us_rms_f0_pau_142_cart = {
 };
 
 
-const cst_cart * const cmu_us_rms_f0_carts[] = {
+const cst_cart * const cmu_us_rms_single_f0_carts[] = {
  &cmu_us_rms_f0_zh_204_cart,
  &cmu_us_rms_f0_zh_205_cart,
  &cmu_us_rms_f0_zh_206_cart,

@@ -42,9 +42,9 @@
 
 /* This gets set to 1 and we test where the on bit is to determine byteorder */
 extern const int cst_endian_loc;
-/* Sun, HP, SGI Mips, M68000, PowerPC */
+/* Sun, HP, SGI Mips, M68000, PowerPC, MIPS24K AR9331 (Yun Arduino, ZSun) */
 #define CST_BIG_ENDIAN (((char *)&cst_endian_loc)[0] == 0)
-/* Intel, Alpha, DEC Mips, Vax, ARM, Other MIPS (Casio, Ben Nanonote etc) */
+/* Intel, Alpha, DEC Mips, Vax, ARM, Other MIPS (GCW-Zero, Ben Nanonote etc) */
 #define CST_LITTLE_ENDIAN (((char *)&cst_endian_loc)[0] != 0)
 /* Perq (from Three Rivers) has a third byte order -- but we have no support */
 

@@ -44,7 +44,7 @@
 #include "cst_lts.h"
 
 typedef struct lexicon_struct {
-    char *name;
+    const char *name;
     int num_entries;
     /* Entries are centered around bytes with value 255 */
     /* entries and forward (compressed) pronunciations and backwards */

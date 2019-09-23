@@ -247,6 +247,7 @@ int play_wave(cst_wave *w)
 	}
     }
 
+    audio_flush(ad);
     audio_close(ad);
 
     return CST_OK_FORMAT;

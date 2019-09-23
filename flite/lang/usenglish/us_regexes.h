@@ -89,6 +89,17 @@ static const cst_regex numess_rx = {
 };
 const cst_regex * const numess = &numess_rx;
 
+static const unsigned char leadingzerodigits_rxprog[] = {
+   156, 6, 0, 31, 1, 0, 3, 8, 0, 5, 48, 0, 11, 0, 17, 4, 
+   0, 0, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 0, 2, 0, 3, 
+   0, 0, 0, 
+};
+static const cst_regex leadingzerodigits_rx = {
+   0, 1, NULL, 0, 35,
+   (char *)leadingzerodigits_rxprog
+};
+const cst_regex * const leadingzerodigits = &leadingzerodigits_rx;
+
 static const unsigned char sevenphonenumber_rxprog[] = {
    156, 6, 0, 112, 1, 0, 3, 4, 0, 14, 48, 49, 50, 51, 52, 53, 
    54, 55, 56, 57, 0, 4, 0, 14, 48, 49, 50, 51, 52, 53, 54, 55, 
@@ -190,8 +201,8 @@ const cst_regex * const digitsslashdigits = &digitsslashdigits_rx;
 
 static const unsigned char digits2dash_rxprog[] = {
    156, 6, 0, 72, 1, 0, 3, 21, 0, 3, 6, 0, 28, 11, 0, 17, 
-   4, 0, 0, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 0, 8, 0, 
-   5, 45, 0, 3, 0, 3, 31, 0, 3, 6, 0, 6, 7, 0, 37, 6, 
+   4, 0, 0, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 0, 11, 0, 
+   8, 8, 0, 0, 45, 0, 31, 0, 3, 6, 0, 6, 7, 0, 37, 6, 
    0, 3, 9, 0, 3, 11, 0, 17, 4, 0, 0, 48, 49, 50, 51, 52, 
    53, 54, 55, 56, 57, 0, 2, 0, 3, 0, 0, 0, 
 };

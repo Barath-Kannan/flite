@@ -44,12 +44,29 @@
 #include "cst_clunits.h"
 #include "cst_cg.h"
 
+#ifdef WIN32
+/* For Visual Studio 2012 global variable definitions */
+#define GLOBALVARDEF __declspec(dllexport)
+#else
+#define GLOBALVARDEF
+#endif
+
 /* This is a global, which isn't ideal, this may change */
 /* It is set when flite_set_voice_list() is called which happens in */
-/* flite_main() */
-cst_val *flite_voice_list = 0;
-cst_lang flite_lang_list[20];
-int flite_lang_list_length = 0;
+/* flite_main(), but it is now also possible to leave this unset if */
+/* all voice selection names are pathnames to (cg) ./flitevox files */
+/* then this gets populated as the voices get loaded                */
+/* Note these voices remain loaded, there is currently no automatic */
+/* garbage collection, that would be necessary in the long run      */
+/* delete_voice will work, but you'd need to know when to call it   */
+GLOBALVARDEF cst_val *flite_voice_list = NULL;
+
+/* Another global with hold pointers to the language and lexicon    */
+/* initalization functions, we limiting to 20 but it could be bigger */
+/* if we really did support over 20 different languages             */
+#define FLITE_MAX_LANGS 20
+GLOBALVARDEF cst_lang flite_lang_list[FLITE_MAX_LANGS];
+GLOBALVARDEF int flite_lang_list_length = 0;
 
 int flite_init()
 {
@@ -103,7 +120,7 @@ int flite_add_lang(const char *langname,
                    void (*lang_init)(cst_voice *vox),
                    cst_lexicon *(*lex_init)())
 {
-    if (flite_lang_list_length < 19)
+    if (flite_lang_list_length < (FLITE_MAX_LANGS-1))
     {
         flite_lang_list[flite_lang_list_length].lang = langname;
         flite_lang_list[flite_lang_list_length].lang_init = lang_init;
@@ -121,10 +138,12 @@ cst_voice *flite_voice_select(const char *name)
     const cst_val *v;
     cst_voice *voice;
 
-    if (flite_voice_list == NULL)
-        return NULL;  /* oops, not good */
     if (name == NULL)
+    {
+        if (flite_voice_list == NULL)
+            return NULL;  /* oops, not good */
         return val_voice(val_car(flite_voice_list));
+    }
 
     for (v=flite_voice_list; v; v=val_cdr(v))
     {
@@ -140,13 +159,15 @@ cst_voice *flite_voice_select(const char *name)
     }
 
     if (cst_urlp(name) || /* naive check if its a url */
-        cst_strchr(name,'/'))
+        cst_strchr(name,'/') ||
+        cst_strchr(name,'\\') ||
+        cst_strstr(name,".flitevox"))
     {
         voice = flite_voice_load(name);
-		if (!voice){
-			cst_errmsg("Error load voice: failed to load voice from %s\n", name);
-		}
-		flite_add_voice(voice);
+        if (!voice)
+            cst_errmsg("Error load voice: failed to load voice from %s\n",name);
+        else
+            flite_add_voice(voice);
         return voice;
     }
 

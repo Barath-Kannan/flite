@@ -167,10 +167,9 @@ const cst_val *content_words_in(const cst_item *p)
     s=item_as(path_to_item(p,"R:SylStructure.R:Phrase.parent.daughter1"),"Word");
     for (;s && !item_equal(p,s);s=item_next(s))
     {
-        if (!strcmp(ffeature_string(s,"gpos"),"content"))
+        if (cst_streq(ffeature_string(s,"gpos"),"content"))
         {i++;}
     }
-    //	if(!strcmp(ffeature_string(p,"gpos"), "content")){i++;}
     return val_string_n(i);
 }
 
@@ -183,23 +182,24 @@ const cst_val *content_words_out(const cst_item *p)
 #if 1 /* fix by uratec */
   for (;s && !item_equal(p,s);s=item_prev(s))
     {
-      if (!strcmp(ffeature_string(s,"gpos"),"content"))
+      if (cst_streq(ffeature_string(s,"gpos"),"content"))
         {i++;}
     }
 #else
     for (;s && !item_equal(p,s);p=item_next(p))
     {
-        if (!strcmp(ffeature_string(p,"gpos"),"content"))
+        if (cst_streq(ffeature_string(p,"gpos"),"content"))
         {i++;}
     }
-    if(!strcmp(ffeature_string(s,"gpos"), "content")){i++;}
+    if(cst_streq(ffeature_string(s,"gpos"), "content")){i++;}
 #endif
     return val_string_n(i);
 }
 
 const cst_val *cg_content_words_in_phrase(const cst_item *p)
 {
-	return float_val(ffeature_float(p,"R:SylStructure.parent.parent.R:Word.content_words_in") + ffeature_float(p,"R:SylStructure.parent.parent.R:Word.content_words_out")) ;//- (strcmp(ffeature_string(p,"R:SylStructure.parent.parent.R:Word.gpos"),"content")==0?1:0));
+	return float_val(ffeature_float(p,"R:SylStructure.parent.parent.R:Word.content_words_in") + 
+                         ffeature_float(p,"R:SylStructure.parent.parent.R:Word.content_words_out")) ;
 }
 
 

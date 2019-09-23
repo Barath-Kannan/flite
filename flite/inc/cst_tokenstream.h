@@ -130,6 +130,17 @@ cst_tokenstream *ts_open_generic(const char *filename,
                                  int (*getc)(cst_tokenstream *ts));
 void ts_close(cst_tokenstream *ts);
 
+#ifdef _WIN32
+__inline int ts_utf8_sequence_length(char c0);
+#else
+int ts_utf8_sequence_length(char c0);
+#endif
+ // {
+//    /* Get the expected length of UTF8 sequence given its most */
+//    /* significant byte */
+//    return (( 0xE5000000 >> (( c0 >> 3 ) & 0x1E )) & 3 ) + 1;
+// }
+
 int ts_eof(cst_tokenstream *ts);
 const cst_string *ts_get(cst_tokenstream *ts);
 

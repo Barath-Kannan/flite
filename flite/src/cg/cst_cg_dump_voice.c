@@ -154,12 +154,40 @@ static void cst_cg_write_array(cst_file fd, const void* data, int bytesize)
     cst_cg_write_padded(fd, data, bytesize);
 }
 
-/* Write a two dimensional array, with every unit item's size given */
-static void cst_cg_write_2d_array(cst_file fd, void** data, 
-                          int rows, int cols, int unitsize)
+/* Write a two dimensional array, use different functions for different 
+   item sizes -- to be safe (I made errors before on this) */
+static void cst_cg_write_2d_array_short(cst_file fd,
+                                        const unsigned short ** data, 
+                                        int rows, int cols)
 {
     int i;
-    int columnsize = cols*unitsize;
+    int columnsize = cols*sizeof(unsigned short);
+
+    cst_fwrite(fd, &rows, sizeof(int),1);
+
+    for(i=0;i<rows;i++)
+        cst_cg_write_array(fd, data[i], columnsize);
+}
+
+static void cst_cg_write_2d_array_float(cst_file fd,
+                                        const float * const *data, 
+                                        int rows, int cols)
+{
+    int i;
+    int columnsize = cols*sizeof(float);
+
+    cst_fwrite(fd, &rows, sizeof(int),1);
+
+    for(i=0;i<rows;i++)
+        cst_cg_write_array(fd, data[i], columnsize);
+}
+
+static void cst_cg_write_2d_array_double(cst_file fd,
+                                        const double *const *data, 
+                                        int rows, int cols)
+{
+    int i;
+    int columnsize = cols*sizeof(double);
 
     cst_fwrite(fd, &rows, sizeof(int),1);
 
@@ -172,7 +200,7 @@ static void cst_cg_write_dur_stats(cst_file fd, const dur_stat* const * ds)
 {
     int i;
     int numstats;
-    char* s;
+    const char* s;
     numstats = 0;
     while(ds[numstats])
         numstats++;
@@ -219,6 +247,18 @@ static void cst_cg_write_voice_feature(cst_file fd,
     cst_cg_write_padded(fd, fval, cst_strlen(fval)+1);
 }
 
+static int cst_actual_num_channels(const cst_cg_db *db, int pm)
+{
+    /* This function should really be part of the commpression/uncompresssion
+       code */
+    if (db->model_shape == CST_CG_MODEL_SHAPE_QUANTIZED_PARAMS)
+        return db->num_channels[pm]/2;
+    else if (db->model_shape == CST_CG_MODEL_SHAPE_QUANTIZED_PARAMS_41)
+        return 41;
+    else
+        return db->num_channels[pm];
+}
+
 int cst_cg_dump_voice(const cst_voice *v,const cst_string *filename)
 {
     cst_file fd;
@@ -237,6 +277,9 @@ int cst_cg_dump_voice(const cst_voice *v,const cst_string *filename)
 
     cst_cg_write_voice_feature(fd, "language", 
                           get_param_string(v->features,"language","eng"));
+    if (get_param_string(v->features,"secondary_languages",NULL))
+        cst_cg_write_voice_feature(fd, "secondary_languages", 
+                       get_param_string(v->features,"secondary_languages",""));
     cst_cg_write_voice_feature(fd, "country", 
                           get_param_string(v->features,"country","USA"));
     cst_cg_write_voice_feature(fd, "variant", 
@@ -249,14 +292,42 @@ int cst_cg_dump_voice(const cst_voice *v,const cst_string *filename)
                           get_param_string(v->features,"build_date","unknown"));
     cst_cg_write_voice_feature(fd, "description", 
                           get_param_string(v->features,"description","unknown"));
+    if (get_param_string(v->features,"prompt_dur",NULL))
+        cst_cg_write_voice_feature(fd, "prompt_dur", 
+                          get_param_string(v->features,"prompt_dur","unknown"));
+    if (get_param_string(v->features,"english_data",NULL))
+        cst_cg_write_voice_feature(fd, "english_data", 
+                                   get_param_string(v->features,"english_data","unknown"));
+    /* Sai Krishna 07 July 2017  */
+    /* Flag to use shared vs mapped eng phoneset, for bilingual voices */
+    if (get_param_string(v->features,"eng_shared",NULL))
+        cst_cg_write_voice_feature(fd, "eng_shared", 
+                         get_param_string(v->features,"eng_shared","0"));
+
+    /* These three must be saved as string features
+       (though are interpreted as floats) */
+    if (get_param_string(v->features,"int_f0_target_mean",NULL))
+        cst_cg_write_voice_feature(fd, "int_f0_target_mean", 
+            get_param_string(v->features,"int_f0_target_mean",NULL));
+    if (get_param_string(v->features,"int_f0_target_stddev",NULL))
+        cst_cg_write_voice_feature(fd, "int_f0_target_stddev", 
+            get_param_string(v->features,"int_f0_target_stddev",NULL));
+    if (get_param_string(v->features,"duration_stretch",NULL))
+        cst_cg_write_voice_feature(fd, "duration_stretch", 
+            get_param_string(v->features,"duration_stretch",NULL));
+        
     cst_cg_write_voice_feature(fd, "copyright", 
                           get_param_string(v->features,"copyright","unknown"));
 
-    /* These features define the number of mopdels to be read */
+    /* These features define the number of models to be read */
     cst_cg_write_voice_feature(fd,"num_dur_models",
                                val_string(val_string_n(db->num_dur_models)));
     cst_cg_write_voice_feature(fd,"num_param_models",
                                val_string(val_string_n(db->num_param_models)));
+    cst_cg_write_voice_feature(fd,"model_shape",
+                               val_string(val_string_n(db->model_shape)));
+    cst_cg_write_voice_feature(fd,"num_f0_models",
+                               val_string(val_string_n(db->num_f0_models)));
 
     cst_cg_write_voice_feature(fd, "end_of_features","end_of_features");
 
@@ -269,7 +340,8 @@ int cst_cg_dump_voice(const cst_voice *v,const cst_string *filename)
     cst_fwrite(fd,&db->f0_mean,sizeof(float),1); 
     cst_fwrite(fd,&db->f0_stddev,sizeof(float),1); 
 
-    cst_cg_write_tree_array(fd,db->f0_trees);
+    for (pm=0; pm<db->num_f0_models; pm++)
+        cst_cg_write_tree_array(fd,db->f0_trees[pm]);
 
     for (pm=0; pm<db->num_param_models; pm++)
         cst_cg_write_tree_array(fd,db->param_trees[pm]);
@@ -285,23 +357,32 @@ int cst_cg_dump_voice(const cst_voice *v,const cst_string *filename)
     {
         cst_fwrite(fd,&db->num_channels[pm],sizeof(int),1); 
         cst_fwrite(fd,&db->num_frames[pm],sizeof(int),1); 
-        cst_cg_write_2d_array(fd, (void *)db->model_vectors[pm], 
-                              db->num_frames[pm], 
-                              db->num_channels[pm], sizeof(unsigned short));
+        cst_cg_write_2d_array_short(fd, db->model_vectors[pm], 
+                                    db->num_frames[pm], 
+                                    cst_actual_num_channels(db,pm));
     }
 
     if (db->spamf0)
     {
         cst_fwrite(fd,&db->num_channels_spamf0_accent,sizeof(int),1); 
         cst_fwrite(fd,&db->num_frames_spamf0_accent,sizeof(int),1); 
-        cst_cg_write_2d_array(fd, (void *)db->spamf0_accent_vectors, 
-                              db->num_frames_spamf0_accent, 
-                              db->num_channels_spamf0_accent, 
-                              sizeof(float));
+        cst_cg_write_2d_array_float(fd, db->spamf0_accent_vectors, 
+                                    db->num_frames_spamf0_accent, 
+                                    db->num_channels_spamf0_accent);
     }
   
     cst_cg_write_array(fd, db->model_min, sizeof(float)*db->num_channels[0]);
     cst_cg_write_array(fd, db->model_range, sizeof(float)*db->num_channels[0]);
+
+    if (db->model_shape > CST_CG_MODEL_SHAPE_BASE_MINRANGE)
+    {   /* dump the qtable if shape > 1 */
+        for (pm=0; pm<db->num_param_models; pm++)
+        {
+            cst_cg_write_2d_array_float(fd, db->qtable[pm], 
+                                        db->num_channels[pm], /* "frames" */
+                                        256);
+        }
+    }
 
     cst_fwrite(fd,&db->frame_advance,sizeof(float),1); 
 
@@ -325,8 +406,8 @@ int cst_cg_dump_voice(const cst_voice *v,const cst_string *filename)
 
     cst_fwrite(fd,&db->ME_num,sizeof(int),1); 
     cst_fwrite(fd,&db->ME_order,sizeof(int),1); 
-    cst_cg_write_2d_array(fd, (void *)db->me_h, 
-                       db->ME_num, db->ME_order, sizeof(double)); 
+    cst_cg_write_2d_array_double(fd, db->me_h, 
+                                 db->ME_num, db->ME_order); 
 
     cst_fwrite(fd,&db->spamf0,sizeof(int),1); 
     cst_fwrite(fd,&db->gain,sizeof(float),1); 

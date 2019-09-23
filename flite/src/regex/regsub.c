@@ -72,7 +72,7 @@ size_t cst_regsub(const cst_regstate *state, const char *in, char *out, size_t m
 			count += len;
 		}
 	}
-	if (out && dst - out + 1 < max)
+	if (out && dst - out + 1 < (int)max)
 		*dst++ = '\0';
 
 	return count;

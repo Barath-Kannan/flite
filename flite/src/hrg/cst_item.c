@@ -271,12 +271,27 @@ cst_item *item_nth_daughter(const cst_item *i,int n)
     return p;
 }
 
-
 cst_item *item_last_daughter(const cst_item *i)
 {
     cst_item *p;
 
     for (p=item_daughter(i); item_next(p); p=item_next(p));
+    return p;
+}
+
+cst_item *item_first(const cst_item *i)
+{
+    cst_item *p;
+
+    for (p=(cst_item *)(void *)i; item_prev(p); p=item_prev(p));
+    return p;
+}
+
+cst_item *item_last(const cst_item *i)
+{
+    cst_item *p;
+
+    for (p=(cst_item *)(void *)i; item_next(p); p=item_next(p));
     return p;
 }
 
