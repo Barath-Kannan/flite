@@ -9,7 +9,7 @@ extern const unsigned char cmu_us_kal_res[];
 extern const unsigned int cmu_us_kal_resi[];
 extern const unsigned char cmu_us_kal_ressize[];
 
-cst_sts_list cmu_us_kal_sts = {
+extern cst_sts_list cmu_us_kal_sts = {
     0,
     0,
 #ifdef CST_NO_STATIC_VOX
@@ -1656,7 +1656,7 @@ static const cst_diphone_entry cmu_us_kal_index[] = {
     {"zh-zh", 18940, 5, 5},
     {0, 0, 0, 0}};
 
-const cst_diphone_db cmu_us_kal_db = {
+extern const cst_diphone_db cmu_us_kal_db = {
     "cmu_us_kal",
     1623,
     cmu_us_kal_index,

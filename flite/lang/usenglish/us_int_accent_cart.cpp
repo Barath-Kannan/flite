@@ -183,6 +183,6 @@ static const char* const us_int_accent_feat_table[] = {
     "n.n.syl_break",
     NULL};
 
-const cst_cart us_int_accent_cart = {
+extern const cst_cart us_int_accent_cart = {
     us_int_accent_cart_nodes,
     us_int_accent_feat_table};

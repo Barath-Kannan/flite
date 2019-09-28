@@ -415,7 +415,7 @@ static const cst_val* const cmu_grapheme_featvals[] = {
     (cst_val*)&featval_16,
     NULL};
 
-const cst_phoneset cmu_grapheme_phoneset = {
+extern const cst_phoneset cmu_grapheme_phoneset = {
     "cmu_grapheme",
     cmu_grapheme_featnames,
     cmu_grapheme_featvals,

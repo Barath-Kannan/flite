@@ -35,7 +35,7 @@ static const char * const cmu_us_slt_single_mcep_zh_204_feat_table[] = {
 "R:mcep_link.parent.R:segstate.n.lisp_cg_duration",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_zh_204_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_zh_204_cart = {
   cmu_us_slt_single_mcep_zh_204_cart_nodes,
   cmu_us_slt_single_mcep_zh_204_feat_table
 };
@@ -51,7 +51,7 @@ static const char * const cmu_us_slt_single_mcep_zh_205_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_vheight",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_zh_205_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_zh_205_cart = {
   cmu_us_slt_single_mcep_zh_205_cart_nodes,
   cmu_us_slt_single_mcep_zh_205_feat_table
 };
@@ -64,7 +64,7 @@ static const cst_cart_node cmu_us_slt_single_mcep_zh_206_cart_nodes[] = {
 static const char * const cmu_us_slt_single_mcep_zh_206_feat_table[] = {
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_zh_206_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_zh_206_cart = {
   cmu_us_slt_single_mcep_zh_206_cart_nodes,
   cmu_us_slt_single_mcep_zh_206_feat_table
 };
@@ -112,7 +112,7 @@ static const char * const cmu_us_slt_single_mcep_oy_131_feat_table[] = {
 "lisp_cg_state_rindex",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_oy_131_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_oy_131_cart = {
   cmu_us_slt_single_mcep_oy_131_cart_nodes,
   cmu_us_slt_single_mcep_oy_131_feat_table
 };
@@ -166,7 +166,7 @@ static const char * const cmu_us_slt_single_mcep_oy_132_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.accented",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_oy_132_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_oy_132_cart = {
   cmu_us_slt_single_mcep_oy_132_cart_nodes,
   cmu_us_slt_single_mcep_oy_132_feat_table
 };
@@ -216,7 +216,7 @@ static const char * const cmu_us_slt_single_mcep_oy_133_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.lisp_cg_break",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_oy_133_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_oy_133_cart = {
   cmu_us_slt_single_mcep_oy_133_cart_nodes,
   cmu_us_slt_single_mcep_oy_133_feat_table
 };
@@ -284,7 +284,7 @@ static const char * const cmu_us_slt_single_mcep_ch_41_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.R:Word.n.gpos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ch_41_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ch_41_cart = {
   cmu_us_slt_single_mcep_ch_41_cart_nodes,
   cmu_us_slt_single_mcep_ch_41_feat_table
 };
@@ -370,7 +370,7 @@ static const char * const cmu_us_slt_single_mcep_ch_42_feat_table[] = {
 "lisp_cg_phone_place",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ch_42_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ch_42_cart = {
   cmu_us_slt_single_mcep_ch_42_cart_nodes,
   cmu_us_slt_single_mcep_ch_42_feat_table
 };
@@ -440,7 +440,7 @@ static const char * const cmu_us_slt_single_mcep_ch_43_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.seg_onsetcoda",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ch_43_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ch_43_cart = {
   cmu_us_slt_single_mcep_ch_43_cart_nodes,
   cmu_us_slt_single_mcep_ch_43_feat_table
 };
@@ -545,7 +545,7 @@ static const char * const cmu_us_slt_single_mcep_aw_21_feat_table[] = {
 "R:mcep_link.parent.R:HMMstate.p.name",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_aw_21_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_aw_21_cart = {
   cmu_us_slt_single_mcep_aw_21_cart_nodes,
   cmu_us_slt_single_mcep_aw_21_feat_table
 };
@@ -661,7 +661,7 @@ static const char * const cmu_us_slt_single_mcep_aw_22_feat_table[] = {
 "lisp_cg_phone_index",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_aw_22_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_aw_22_cart = {
   cmu_us_slt_single_mcep_aw_22_cart_nodes,
   cmu_us_slt_single_mcep_aw_22_feat_table
 };
@@ -761,7 +761,7 @@ static const char * const cmu_us_slt_single_mcep_aw_23_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_cplace",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_aw_23_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_aw_23_cart = {
   cmu_us_slt_single_mcep_aw_23_cart_nodes,
   cmu_us_slt_single_mcep_aw_23_feat_table
 };
@@ -905,7 +905,7 @@ static const char * const cmu_us_slt_single_mcep_ow_126_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.R:Word.p.gpos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ow_126_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ow_126_cart = {
   cmu_us_slt_single_mcep_ow_126_cart_nodes,
   cmu_us_slt_single_mcep_ow_126_feat_table
 };
@@ -1075,7 +1075,7 @@ static const char * const cmu_us_slt_single_mcep_ow_127_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.R:Word.n.gpos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ow_127_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ow_127_cart = {
   cmu_us_slt_single_mcep_ow_127_cart_nodes,
   cmu_us_slt_single_mcep_ow_127_feat_table
 };
@@ -1181,7 +1181,7 @@ static const char * const cmu_us_slt_single_mcep_ow_128_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_vheight",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ow_128_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ow_128_cart = {
   cmu_us_slt_single_mcep_ow_128_cart_nodes,
   cmu_us_slt_single_mcep_ow_128_feat_table
 };
@@ -1307,7 +1307,7 @@ static const char * const cmu_us_slt_single_mcep_b_36_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_ctype",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_b_36_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_b_36_cart = {
   cmu_us_slt_single_mcep_b_36_cart_nodes,
   cmu_us_slt_single_mcep_b_36_feat_table
 };
@@ -1394,7 +1394,7 @@ static const char * const cmu_us_slt_single_mcep_b_37_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.lisp_cg_break",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_b_37_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_b_37_cart = {
   cmu_us_slt_single_mcep_b_37_cart_nodes,
   cmu_us_slt_single_mcep_b_37_feat_table
 };
@@ -1463,7 +1463,7 @@ static const char * const cmu_us_slt_single_mcep_b_38_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_vc",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_b_38_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_b_38_cart = {
   cmu_us_slt_single_mcep_b_38_cart_nodes,
   cmu_us_slt_single_mcep_b_38_feat_table
 };
@@ -1512,7 +1512,7 @@ static const char * const cmu_us_slt_single_mcep_g_76_feat_table[] = {
 "lisp_cg_state_index",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_g_76_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_g_76_cart = {
   cmu_us_slt_single_mcep_g_76_cart_nodes,
   cmu_us_slt_single_mcep_g_76_feat_table
 };
@@ -1588,7 +1588,7 @@ static const char * const cmu_us_slt_single_mcep_g_77_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.name",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_g_77_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_g_77_cart = {
   cmu_us_slt_single_mcep_g_77_cart_nodes,
   cmu_us_slt_single_mcep_g_77_feat_table
 };
@@ -1687,7 +1687,7 @@ static const char * const cmu_us_slt_single_mcep_g_78_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.lisp_cg_break",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_g_78_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_g_78_cart = {
   cmu_us_slt_single_mcep_g_78_cart_nodes,
   cmu_us_slt_single_mcep_g_78_feat_table
 };
@@ -1786,7 +1786,7 @@ static const char * const cmu_us_slt_single_mcep_ng_121_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.stress",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ng_121_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ng_121_cart = {
   cmu_us_slt_single_mcep_ng_121_cart_nodes,
   cmu_us_slt_single_mcep_ng_121_feat_table
 };
@@ -1907,7 +1907,7 @@ static const char * const cmu_us_slt_single_mcep_ng_122_feat_table[] = {
 "lisp_cg_phone_index",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ng_122_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ng_122_cart = {
   cmu_us_slt_single_mcep_ng_122_cart_nodes,
   cmu_us_slt_single_mcep_ng_122_feat_table
 };
@@ -2003,7 +2003,7 @@ static const char * const cmu_us_slt_single_mcep_ng_123_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.name",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ng_123_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ng_123_cart = {
   cmu_us_slt_single_mcep_ng_123_cart_nodes,
   cmu_us_slt_single_mcep_ng_123_feat_table
 };
@@ -2105,7 +2105,7 @@ static const char * const cmu_us_slt_single_mcep_uw_179_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.R:Word.n.gpos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_uw_179_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_uw_179_cart = {
   cmu_us_slt_single_mcep_uw_179_cart_nodes,
   cmu_us_slt_single_mcep_uw_179_feat_table
 };
@@ -2204,7 +2204,7 @@ static const char * const cmu_us_slt_single_mcep_uw_180_feat_table[] = {
 "lisp_cg_state_place",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_uw_180_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_uw_180_cart = {
   cmu_us_slt_single_mcep_uw_180_cart_nodes,
   cmu_us_slt_single_mcep_uw_180_feat_table
 };
@@ -2320,7 +2320,7 @@ static const char * const cmu_us_slt_single_mcep_uw_181_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_cplace",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_uw_181_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_uw_181_cart = {
   cmu_us_slt_single_mcep_uw_181_cart_nodes,
   cmu_us_slt_single_mcep_uw_181_feat_table
 };
@@ -2394,7 +2394,7 @@ static const char * const cmu_us_slt_single_mcep_sh_156_feat_table[] = {
 "R:mcep_link.parent.R:segstate.n.lisp_cg_duration",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_sh_156_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_sh_156_cart = {
   cmu_us_slt_single_mcep_sh_156_cart_nodes,
   cmu_us_slt_single_mcep_sh_156_feat_table
 };
@@ -2587,7 +2587,7 @@ static const char * const cmu_us_slt_single_mcep_sh_157_feat_table[] = {
 "lisp_cg_phone_rindex",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_sh_157_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_sh_157_cart = {
   cmu_us_slt_single_mcep_sh_157_cart_nodes,
   cmu_us_slt_single_mcep_sh_157_feat_table
 };
@@ -2636,7 +2636,7 @@ static const char * const cmu_us_slt_single_mcep_sh_158_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.R:Syllable.p.lisp_cg_break",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_sh_158_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_sh_158_cart = {
   cmu_us_slt_single_mcep_sh_158_cart_nodes,
   cmu_us_slt_single_mcep_sh_158_feat_table
 };
@@ -2669,7 +2669,7 @@ static const char * const cmu_us_slt_single_mcep_uh_174_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.lisp_cg_break",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_uh_174_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_uh_174_cart = {
   cmu_us_slt_single_mcep_uh_174_cart_nodes,
   cmu_us_slt_single_mcep_uh_174_feat_table
 };
@@ -2700,7 +2700,7 @@ static const char * const cmu_us_slt_single_mcep_uh_175_feat_table[] = {
 "R:mcep_link.parent.R:segstate.p.lisp_cg_duration",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_uh_175_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_uh_175_cart = {
   cmu_us_slt_single_mcep_uh_175_cart_nodes,
   cmu_us_slt_single_mcep_uh_175_feat_table
 };
@@ -2735,7 +2735,7 @@ static const char * const cmu_us_slt_single_mcep_uh_176_feat_table[] = {
 "R:mcep_link.parent.R:segstate.p.lisp_cg_duration",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_uh_176_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_uh_176_cart = {
   cmu_us_slt_single_mcep_uh_176_cart_nodes,
   cmu_us_slt_single_mcep_uh_176_feat_table
 };
@@ -2880,7 +2880,7 @@ static const char * const cmu_us_slt_single_mcep_hh_81_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_vlng",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_hh_81_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_hh_81_cart = {
   cmu_us_slt_single_mcep_hh_81_cart_nodes,
   cmu_us_slt_single_mcep_hh_81_feat_table
 };
@@ -2976,7 +2976,7 @@ static const char * const cmu_us_slt_single_mcep_hh_82_feat_table[] = {
 "lisp_cg_position_in_phrasep",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_hh_82_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_hh_82_cart = {
   cmu_us_slt_single_mcep_hh_82_cart_nodes,
   cmu_us_slt_single_mcep_hh_82_feat_table
 };
@@ -3107,7 +3107,7 @@ static const char * const cmu_us_slt_single_mcep_hh_83_feat_table[] = {
 "lisp_cg_phone_place",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_hh_83_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_hh_83_cart = {
   cmu_us_slt_single_mcep_hh_83_cart_nodes,
   cmu_us_slt_single_mcep_hh_83_feat_table
 };
@@ -3327,7 +3327,7 @@ static const char * const cmu_us_slt_single_mcep_ae_6_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.R:Word.p.gpos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ae_6_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ae_6_cart = {
   cmu_us_slt_single_mcep_ae_6_cart_nodes,
   cmu_us_slt_single_mcep_ae_6_feat_table
 };
@@ -3659,7 +3659,7 @@ static const char * const cmu_us_slt_single_mcep_ae_7_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_cvox",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ae_7_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ae_7_cart = {
   cmu_us_slt_single_mcep_ae_7_cart_nodes,
   cmu_us_slt_single_mcep_ae_7_feat_table
 };
@@ -3825,7 +3825,7 @@ static const char * const cmu_us_slt_single_mcep_ae_8_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_cplace",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ae_8_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ae_8_cart = {
   cmu_us_slt_single_mcep_ae_8_cart_nodes,
   cmu_us_slt_single_mcep_ae_8_feat_table
 };
@@ -3883,7 +3883,7 @@ static const char * const cmu_us_slt_single_mcep_y_194_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_cplace",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_y_194_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_y_194_cart = {
   cmu_us_slt_single_mcep_y_194_cart_nodes,
   cmu_us_slt_single_mcep_y_194_feat_table
 };
@@ -3959,7 +3959,7 @@ static const char * const cmu_us_slt_single_mcep_y_195_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_ctype",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_y_195_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_y_195_cart = {
   cmu_us_slt_single_mcep_y_195_cart_nodes,
   cmu_us_slt_single_mcep_y_195_feat_table
 };
@@ -4026,7 +4026,7 @@ static const char * const cmu_us_slt_single_mcep_y_196_feat_table[] = {
 "R:mcep_link.parent.R:segstate.p.lisp_cg_duration",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_y_196_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_y_196_cart = {
   cmu_us_slt_single_mcep_y_196_cart_nodes,
   cmu_us_slt_single_mcep_y_196_feat_table
 };
@@ -4161,7 +4161,7 @@ static const char * const cmu_us_slt_single_mcep_k_101_feat_table[] = {
 "lisp_cg_position_in_phrasep",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_k_101_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_k_101_cart = {
   cmu_us_slt_single_mcep_k_101_cart_nodes,
   cmu_us_slt_single_mcep_k_101_feat_table
 };
@@ -4364,7 +4364,7 @@ static const char * const cmu_us_slt_single_mcep_k_102_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.lisp_is_pau",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_k_102_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_k_102_cart = {
   cmu_us_slt_single_mcep_k_102_cart_nodes,
   cmu_us_slt_single_mcep_k_102_feat_table
 };
@@ -4621,7 +4621,7 @@ static const char * const cmu_us_slt_single_mcep_k_103_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.R:Word.p.gpos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_k_103_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_k_103_cart = {
   cmu_us_slt_single_mcep_k_103_cart_nodes,
   cmu_us_slt_single_mcep_k_103_feat_table
 };
@@ -4718,7 +4718,7 @@ static const char * const cmu_us_slt_single_mcep_aa_1_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_ctype",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_aa_1_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_aa_1_cart = {
   cmu_us_slt_single_mcep_aa_1_cart_nodes,
   cmu_us_slt_single_mcep_aa_1_feat_table
 };
@@ -4972,7 +4972,7 @@ static const char * const cmu_us_slt_single_mcep_aa_2_feat_table[] = {
 "R:mcep_link.parent.R:segstate.n.lisp_cg_duration",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_aa_2_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_aa_2_cart = {
   cmu_us_slt_single_mcep_aa_2_cart_nodes,
   cmu_us_slt_single_mcep_aa_2_feat_table
 };
@@ -5126,7 +5126,7 @@ static const char * const cmu_us_slt_single_mcep_aa_3_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_cvox",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_aa_3_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_aa_3_cart = {
   cmu_us_slt_single_mcep_aa_3_cart_nodes,
   cmu_us_slt_single_mcep_aa_3_feat_table
 };
@@ -5314,7 +5314,7 @@ static const char * const cmu_us_slt_single_mcep_ay_31_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.R:Word.n.gpos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ay_31_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ay_31_cart = {
   cmu_us_slt_single_mcep_ay_31_cart_nodes,
   cmu_us_slt_single_mcep_ay_31_feat_table
 };
@@ -5552,7 +5552,7 @@ static const char * const cmu_us_slt_single_mcep_ay_32_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_cvox",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ay_32_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ay_32_cart = {
   cmu_us_slt_single_mcep_ay_32_cart_nodes,
   cmu_us_slt_single_mcep_ay_32_feat_table
 };
@@ -5797,7 +5797,7 @@ static const char * const cmu_us_slt_single_mcep_ay_33_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_cplace",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ay_33_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ay_33_cart = {
   cmu_us_slt_single_mcep_ay_33_cart_nodes,
   cmu_us_slt_single_mcep_ay_33_feat_table
 };
@@ -5910,7 +5910,7 @@ static const char * const cmu_us_slt_single_mcep_w_189_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_ctype",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_w_189_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_w_189_cart = {
   cmu_us_slt_single_mcep_w_189_cart_nodes,
   cmu_us_slt_single_mcep_w_189_feat_table
 };
@@ -6081,7 +6081,7 @@ static const char * const cmu_us_slt_single_mcep_w_190_feat_table[] = {
 "R:mcep_link.parent.R:segstate.n.lisp_cg_duration",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_w_190_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_w_190_cart = {
   cmu_us_slt_single_mcep_w_190_cart_nodes,
   cmu_us_slt_single_mcep_w_190_feat_table
 };
@@ -6225,7 +6225,7 @@ static const char * const cmu_us_slt_single_mcep_w_191_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_cplace",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_w_191_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_w_191_cart = {
   cmu_us_slt_single_mcep_w_191_cart_nodes,
   cmu_us_slt_single_mcep_w_191_feat_table
 };
@@ -6356,7 +6356,7 @@ static const char * const cmu_us_slt_single_mcep_m_111_feat_table[] = {
 "lisp_cg_state_place",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_m_111_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_m_111_cart = {
   cmu_us_slt_single_mcep_m_111_cart_nodes,
   cmu_us_slt_single_mcep_m_111_feat_table
 };
@@ -6613,7 +6613,7 @@ static const char * const cmu_us_slt_single_mcep_m_112_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_cvox",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_m_112_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_m_112_cart = {
   cmu_us_slt_single_mcep_m_112_cart_nodes,
   cmu_us_slt_single_mcep_m_112_feat_table
 };
@@ -6794,7 +6794,7 @@ static const char * const cmu_us_slt_single_mcep_m_113_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_cplace",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_m_113_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_m_113_cart = {
   cmu_us_slt_single_mcep_m_113_cart_nodes,
   cmu_us_slt_single_mcep_m_113_feat_table
 };
@@ -7943,7 +7943,7 @@ static const char * const cmu_us_slt_single_mcep_pau_143_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_vheight",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_pau_143_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_pau_143_cart = {
   cmu_us_slt_single_mcep_pau_143_cart_nodes,
   cmu_us_slt_single_mcep_pau_143_feat_table
 };
@@ -8058,7 +8058,7 @@ static const char * const cmu_us_slt_single_mcep_ao_16_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.position_type",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ao_16_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ao_16_cart = {
   cmu_us_slt_single_mcep_ao_16_cart_nodes,
   cmu_us_slt_single_mcep_ao_16_feat_table
 };
@@ -8254,7 +8254,7 @@ static const char * const cmu_us_slt_single_mcep_ao_17_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.lisp_is_pau",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ao_17_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ao_17_cart = {
   cmu_us_slt_single_mcep_ao_17_cart_nodes,
   cmu_us_slt_single_mcep_ao_17_feat_table
 };
@@ -8398,7 +8398,7 @@ static const char * const cmu_us_slt_single_mcep_ao_18_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_cvox",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ao_18_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ao_18_cart = {
   cmu_us_slt_single_mcep_ao_18_cart_nodes,
   cmu_us_slt_single_mcep_ao_18_feat_table
 };
@@ -8455,7 +8455,7 @@ static const char * const cmu_us_slt_single_mcep_th_169_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_vc",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_th_169_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_th_169_cart = {
   cmu_us_slt_single_mcep_th_169_cart_nodes,
   cmu_us_slt_single_mcep_th_169_feat_table
 };
@@ -8535,7 +8535,7 @@ static const char * const cmu_us_slt_single_mcep_th_170_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_vrnd",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_th_170_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_th_170_cart = {
   cmu_us_slt_single_mcep_th_170_cart_nodes,
   cmu_us_slt_single_mcep_th_170_feat_table
 };
@@ -8580,7 +8580,7 @@ static const char * const cmu_us_slt_single_mcep_th_171_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_vheight",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_th_171_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_th_171_cart = {
   cmu_us_slt_single_mcep_th_171_cart_nodes,
   cmu_us_slt_single_mcep_th_171_feat_table
 };
@@ -8677,7 +8677,7 @@ static const char * const cmu_us_slt_single_mcep_ah_11_feat_table[] = {
 "lisp_cg_state_place",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ah_11_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ah_11_cart = {
   cmu_us_slt_single_mcep_ah_11_cart_nodes,
   cmu_us_slt_single_mcep_ah_11_feat_table
 };
@@ -8834,7 +8834,7 @@ static const char * const cmu_us_slt_single_mcep_ah_12_feat_table[] = {
 "R:mcep_link.parent.R:segstate.n.lisp_cg_duration",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ah_12_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ah_12_cart = {
   cmu_us_slt_single_mcep_ah_12_cart_nodes,
   cmu_us_slt_single_mcep_ah_12_feat_table
 };
@@ -8951,7 +8951,7 @@ static const char * const cmu_us_slt_single_mcep_ah_13_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.R:Syllable.p.lisp_cg_break",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ah_13_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ah_13_cart = {
   cmu_us_slt_single_mcep_ah_13_cart_nodes,
   cmu_us_slt_single_mcep_ah_13_feat_table
 };
@@ -9027,7 +9027,7 @@ static const char * const cmu_us_slt_single_mcep_v_184_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_cplace",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_v_184_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_v_184_cart = {
   cmu_us_slt_single_mcep_v_184_cart_nodes,
   cmu_us_slt_single_mcep_v_184_feat_table
 };
@@ -9120,7 +9120,7 @@ static const char * const cmu_us_slt_single_mcep_v_185_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_vlng",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_v_185_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_v_185_cart = {
   cmu_us_slt_single_mcep_v_185_cart_nodes,
   cmu_us_slt_single_mcep_v_185_feat_table
 };
@@ -9238,7 +9238,7 @@ static const char * const cmu_us_slt_single_mcep_v_186_feat_table[] = {
 "lisp_cg_state_place",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_v_186_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_v_186_cart = {
   cmu_us_slt_single_mcep_v_186_cart_nodes,
   cmu_us_slt_single_mcep_v_186_feat_table
 };
@@ -9385,7 +9385,7 @@ static const char * const cmu_us_slt_single_mcep_dh_51_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.R:Word.p.gpos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_dh_51_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_dh_51_cart = {
   cmu_us_slt_single_mcep_dh_51_cart_nodes,
   cmu_us_slt_single_mcep_dh_51_feat_table
 };
@@ -9475,7 +9475,7 @@ static const char * const cmu_us_slt_single_mcep_dh_52_feat_table[] = {
 "lisp_cg_phone_index",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_dh_52_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_dh_52_cart = {
   cmu_us_slt_single_mcep_dh_52_cart_nodes,
   cmu_us_slt_single_mcep_dh_52_feat_table
 };
@@ -9592,7 +9592,7 @@ static const char * const cmu_us_slt_single_mcep_dh_53_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_vlng",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_dh_53_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_dh_53_cart = {
   cmu_us_slt_single_mcep_dh_53_cart_nodes,
   cmu_us_slt_single_mcep_dh_53_feat_table
 };
@@ -9784,7 +9784,7 @@ static const char * const cmu_us_slt_single_mcep_d_46_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_cvox",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_d_46_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_d_46_cart = {
   cmu_us_slt_single_mcep_d_46_cart_nodes,
   cmu_us_slt_single_mcep_d_46_feat_table
 };
@@ -9987,7 +9987,7 @@ static const char * const cmu_us_slt_single_mcep_d_47_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.gpos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_d_47_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_d_47_cart = {
   cmu_us_slt_single_mcep_d_47_cart_nodes,
   cmu_us_slt_single_mcep_d_47_feat_table
 };
@@ -10182,7 +10182,7 @@ static const char * const cmu_us_slt_single_mcep_d_48_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.position_type",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_d_48_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_d_48_cart = {
   cmu_us_slt_single_mcep_d_48_cart_nodes,
   cmu_us_slt_single_mcep_d_48_feat_table
 };
@@ -10421,7 +10421,7 @@ static const char * const cmu_us_slt_single_mcep_n_116_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_vheight",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_n_116_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_n_116_cart = {
   cmu_us_slt_single_mcep_n_116_cart_nodes,
   cmu_us_slt_single_mcep_n_116_feat_table
 };
@@ -10861,7 +10861,7 @@ static const char * const cmu_us_slt_single_mcep_n_117_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.seg_onsetcoda",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_n_117_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_n_117_cart = {
   cmu_us_slt_single_mcep_n_117_cart_nodes,
   cmu_us_slt_single_mcep_n_117_feat_table
 };
@@ -11174,7 +11174,7 @@ static const char * const cmu_us_slt_single_mcep_n_118_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.gpos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_n_118_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_n_118_cart = {
   cmu_us_slt_single_mcep_n_118_cart_nodes,
   cmu_us_slt_single_mcep_n_118_feat_table
 };
@@ -11232,7 +11232,7 @@ static const char * const cmu_us_slt_single_mcep_jh_96_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.R:Word.p.gpos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_jh_96_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_jh_96_cart = {
   cmu_us_slt_single_mcep_jh_96_cart_nodes,
   cmu_us_slt_single_mcep_jh_96_feat_table
 };
@@ -11276,7 +11276,7 @@ static const char * const cmu_us_slt_single_mcep_jh_97_feat_table[] = {
 "lisp_cg_phone_place",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_jh_97_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_jh_97_cart = {
   cmu_us_slt_single_mcep_jh_97_cart_nodes,
   cmu_us_slt_single_mcep_jh_97_feat_table
 };
@@ -11375,7 +11375,7 @@ static const char * const cmu_us_slt_single_mcep_jh_98_feat_table[] = {
 "lisp_cg_state_index",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_jh_98_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_jh_98_cart = {
   cmu_us_slt_single_mcep_jh_98_cart_nodes,
   cmu_us_slt_single_mcep_jh_98_feat_table
 };
@@ -11610,7 +11610,7 @@ static const char * const cmu_us_slt_single_mcep_r_146_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_cplace",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_r_146_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_r_146_cart = {
   cmu_us_slt_single_mcep_r_146_cart_nodes,
   cmu_us_slt_single_mcep_r_146_feat_table
 };
@@ -11944,7 +11944,7 @@ static const char * const cmu_us_slt_single_mcep_r_147_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_vfront",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_r_147_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_r_147_cart = {
   cmu_us_slt_single_mcep_r_147_cart_nodes,
   cmu_us_slt_single_mcep_r_147_feat_table
 };
@@ -12163,7 +12163,7 @@ static const char * const cmu_us_slt_single_mcep_r_148_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_vrnd",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_r_148_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_r_148_cart = {
   cmu_us_slt_single_mcep_r_148_cart_nodes,
   cmu_us_slt_single_mcep_r_148_feat_table
 };
@@ -12345,7 +12345,7 @@ static const char * const cmu_us_slt_single_mcep_ey_66_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.R:Word.p.gpos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ey_66_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ey_66_cart = {
   cmu_us_slt_single_mcep_ey_66_cart_nodes,
   cmu_us_slt_single_mcep_ey_66_feat_table
 };
@@ -12587,7 +12587,7 @@ static const char * const cmu_us_slt_single_mcep_ey_67_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.lisp_is_pau",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ey_67_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ey_67_cart = {
   cmu_us_slt_single_mcep_ey_67_cart_nodes,
   cmu_us_slt_single_mcep_ey_67_feat_table
 };
@@ -12735,7 +12735,7 @@ static const char * const cmu_us_slt_single_mcep_ey_68_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_cplace",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ey_68_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ey_68_cart = {
   cmu_us_slt_single_mcep_ey_68_cart_nodes,
   cmu_us_slt_single_mcep_ey_68_feat_table
 };
@@ -12851,7 +12851,7 @@ static const char * const cmu_us_slt_single_mcep_f_71_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_vlng",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_f_71_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_f_71_cart = {
   cmu_us_slt_single_mcep_f_71_cart_nodes,
   cmu_us_slt_single_mcep_f_71_feat_table
 };
@@ -13134,7 +13134,7 @@ static const char * const cmu_us_slt_single_mcep_f_72_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.R:Word.p.gpos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_f_72_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_f_72_cart = {
   cmu_us_slt_single_mcep_f_72_cart_nodes,
   cmu_us_slt_single_mcep_f_72_feat_table
 };
@@ -13214,7 +13214,7 @@ static const char * const cmu_us_slt_single_mcep_f_73_feat_table[] = {
 "lisp_cg_position_in_phrasep",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_f_73_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_f_73_cart = {
   cmu_us_slt_single_mcep_f_73_cart_nodes,
   cmu_us_slt_single_mcep_f_73_feat_table
 };
@@ -13419,7 +13419,7 @@ static const char * const cmu_us_slt_single_mcep_ih_86_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.position_type",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ih_86_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ih_86_cart = {
   cmu_us_slt_single_mcep_ih_86_cart_nodes,
   cmu_us_slt_single_mcep_ih_86_feat_table
 };
@@ -13704,7 +13704,7 @@ static const char * const cmu_us_slt_single_mcep_ih_87_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.accented",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ih_87_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ih_87_cart = {
   cmu_us_slt_single_mcep_ih_87_cart_nodes,
   cmu_us_slt_single_mcep_ih_87_feat_table
 };
@@ -13998,7 +13998,7 @@ static const char * const cmu_us_slt_single_mcep_ih_88_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.R:Word.p.gpos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ih_88_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ih_88_cart = {
   cmu_us_slt_single_mcep_ih_88_cart_nodes,
   cmu_us_slt_single_mcep_ih_88_feat_table
 };
@@ -14096,7 +14096,7 @@ static const char * const cmu_us_slt_single_mcep_p_136_feat_table[] = {
 "lisp_cg_state_place",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_p_136_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_p_136_cart = {
   cmu_us_slt_single_mcep_p_136_cart_nodes,
   cmu_us_slt_single_mcep_p_136_feat_table
 };
@@ -14252,7 +14252,7 @@ static const char * const cmu_us_slt_single_mcep_p_137_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_cvox",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_p_137_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_p_137_cart = {
   cmu_us_slt_single_mcep_p_137_cart_nodes,
   cmu_us_slt_single_mcep_p_137_feat_table
 };
@@ -14410,7 +14410,7 @@ static const char * const cmu_us_slt_single_mcep_p_138_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.position_type",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_p_138_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_p_138_cart = {
   cmu_us_slt_single_mcep_p_138_cart_nodes,
   cmu_us_slt_single_mcep_p_138_feat_table
 };
@@ -14640,7 +14640,7 @@ static const char * const cmu_us_slt_single_mcep_iy_91_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_cvox",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_iy_91_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_iy_91_cart = {
   cmu_us_slt_single_mcep_iy_91_cart_nodes,
   cmu_us_slt_single_mcep_iy_91_feat_table
 };
@@ -14998,7 +14998,7 @@ static const char * const cmu_us_slt_single_mcep_iy_92_feat_table[] = {
 "lisp_cg_phone_rindex",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_iy_92_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_iy_92_cart = {
   cmu_us_slt_single_mcep_iy_92_cart_nodes,
   cmu_us_slt_single_mcep_iy_92_feat_table
 };
@@ -15223,7 +15223,7 @@ static const char * const cmu_us_slt_single_mcep_iy_93_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.accented",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_iy_93_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_iy_93_cart = {
   cmu_us_slt_single_mcep_iy_93_cart_nodes,
   cmu_us_slt_single_mcep_iy_93_feat_table
 };
@@ -15596,7 +15596,7 @@ static const char * const cmu_us_slt_single_mcep_l_106_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.seg_onsetcoda",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_l_106_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_l_106_cart = {
   cmu_us_slt_single_mcep_l_106_cart_nodes,
   cmu_us_slt_single_mcep_l_106_feat_table
 };
@@ -15922,7 +15922,7 @@ static const char * const cmu_us_slt_single_mcep_l_107_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.gpos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_l_107_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_l_107_cart = {
   cmu_us_slt_single_mcep_l_107_cart_nodes,
   cmu_us_slt_single_mcep_l_107_feat_table
 };
@@ -16177,7 +16177,7 @@ static const char * const cmu_us_slt_single_mcep_l_108_feat_table[] = {
 "lisp_cg_phone_index",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_l_108_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_l_108_cart = {
   cmu_us_slt_single_mcep_l_108_cart_nodes,
   cmu_us_slt_single_mcep_l_108_feat_table
 };
@@ -16306,7 +16306,7 @@ static const char * const cmu_us_slt_single_mcep_z_199_feat_table[] = {
 "R:mcep_link.parent.R:HMMstate.p.name",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_z_199_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_z_199_cart = {
   cmu_us_slt_single_mcep_z_199_cart_nodes,
   cmu_us_slt_single_mcep_z_199_feat_table
 };
@@ -16507,7 +16507,7 @@ static const char * const cmu_us_slt_single_mcep_z_200_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_vlng",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_z_200_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_z_200_cart = {
   cmu_us_slt_single_mcep_z_200_cart_nodes,
   cmu_us_slt_single_mcep_z_200_feat_table
 };
@@ -16771,7 +16771,7 @@ static const char * const cmu_us_slt_single_mcep_z_201_feat_table[] = {
 "lisp_cg_state_pos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_z_201_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_z_201_cart = {
   cmu_us_slt_single_mcep_z_201_cart_nodes,
   cmu_us_slt_single_mcep_z_201_feat_table
 };
@@ -16989,7 +16989,7 @@ static const char * const cmu_us_slt_single_mcep_pau_161_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_cvox",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_pau_161_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_pau_161_cart = {
   cmu_us_slt_single_mcep_pau_161_cart_nodes,
   cmu_us_slt_single_mcep_pau_161_feat_table
 };
@@ -17169,7 +17169,7 @@ static const char * const cmu_us_slt_single_mcep_s_151_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.name",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_s_151_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_s_151_cart = {
   cmu_us_slt_single_mcep_s_151_cart_nodes,
   cmu_us_slt_single_mcep_s_151_feat_table
 };
@@ -17815,7 +17815,7 @@ static const char * const cmu_us_slt_single_mcep_s_152_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_cvox",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_s_152_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_s_152_cart = {
   cmu_us_slt_single_mcep_s_152_cart_nodes,
   cmu_us_slt_single_mcep_s_152_feat_table
 };
@@ -18045,7 +18045,7 @@ static const char * const cmu_us_slt_single_mcep_s_153_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_ctype",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_s_153_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_s_153_cart = {
   cmu_us_slt_single_mcep_s_153_cart_nodes,
   cmu_us_slt_single_mcep_s_153_feat_table
 };
@@ -18161,7 +18161,7 @@ static const char * const cmu_us_slt_single_mcep_eh_56_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_cplace",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_eh_56_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_eh_56_cart = {
   cmu_us_slt_single_mcep_eh_56_cart_nodes,
   cmu_us_slt_single_mcep_eh_56_feat_table
 };
@@ -18370,7 +18370,7 @@ static const char * const cmu_us_slt_single_mcep_eh_57_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.R:Syllable.p.lisp_cg_break",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_eh_57_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_eh_57_cart = {
   cmu_us_slt_single_mcep_eh_57_cart_nodes,
   cmu_us_slt_single_mcep_eh_57_feat_table
 };
@@ -18574,7 +18574,7 @@ static const char * const cmu_us_slt_single_mcep_eh_58_feat_table[] = {
 "lisp_cg_state_place",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_eh_58_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_eh_58_cart = {
   cmu_us_slt_single_mcep_eh_58_cart_nodes,
   cmu_us_slt_single_mcep_eh_58_feat_table
 };
@@ -18911,7 +18911,7 @@ static const char * const cmu_us_slt_single_mcep_t_164_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.R:Word.n.gpos",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_t_164_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_t_164_cart = {
   cmu_us_slt_single_mcep_t_164_cart_nodes,
   cmu_us_slt_single_mcep_t_164_feat_table
 };
@@ -19232,7 +19232,7 @@ static const char * const cmu_us_slt_single_mcep_t_165_feat_table[] = {
 "lisp_cg_position_in_phrasep",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_t_165_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_t_165_cart = {
   cmu_us_slt_single_mcep_t_165_cart_nodes,
   cmu_us_slt_single_mcep_t_165_feat_table
 };
@@ -19456,7 +19456,7 @@ static const char * const cmu_us_slt_single_mcep_t_166_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.seg_onsetcoda",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_t_166_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_t_166_cart = {
   cmu_us_slt_single_mcep_t_166_cart_nodes,
   cmu_us_slt_single_mcep_t_166_feat_table
 };
@@ -19730,7 +19730,7 @@ static const char * const cmu_us_slt_single_mcep_er_61_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_vfront",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_er_61_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_er_61_cart = {
   cmu_us_slt_single_mcep_er_61_cart_nodes,
   cmu_us_slt_single_mcep_er_61_feat_table
 };
@@ -19948,7 +19948,7 @@ static const char * const cmu_us_slt_single_mcep_er_62_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.syl_final",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_er_62_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_er_62_cart = {
   cmu_us_slt_single_mcep_er_62_cart_nodes,
   cmu_us_slt_single_mcep_er_62_feat_table
 };
@@ -20149,7 +20149,7 @@ static const char * const cmu_us_slt_single_mcep_er_63_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.seg_onsetcoda",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_er_63_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_er_63_cart = {
   cmu_us_slt_single_mcep_er_63_cart_nodes,
   cmu_us_slt_single_mcep_er_63_feat_table
 };
@@ -20378,7 +20378,7 @@ static const char * const cmu_us_slt_single_mcep_ax_26_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.seg_onsetcoda",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ax_26_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ax_26_cart = {
   cmu_us_slt_single_mcep_ax_26_cart_nodes,
   cmu_us_slt_single_mcep_ax_26_feat_table
 };
@@ -20582,7 +20582,7 @@ static const char * const cmu_us_slt_single_mcep_ax_27_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.name",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ax_27_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ax_27_cart = {
   cmu_us_slt_single_mcep_ax_27_cart_nodes,
   cmu_us_slt_single_mcep_ax_27_feat_table
 };
@@ -20825,7 +20825,7 @@ static const char * const cmu_us_slt_single_mcep_ax_28_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.n.ph_vfront",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_ax_28_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_ax_28_cart = {
   cmu_us_slt_single_mcep_ax_28_cart_nodes,
   cmu_us_slt_single_mcep_ax_28_feat_table
 };
@@ -21365,7 +21365,7 @@ static const char * const cmu_us_slt_single_mcep_pau_141_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_vlng",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_pau_141_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_pau_141_cart = {
   cmu_us_slt_single_mcep_pau_141_cart_nodes,
   cmu_us_slt_single_mcep_pau_141_feat_table
 };
@@ -21663,7 +21663,7 @@ static const char * const cmu_us_slt_single_mcep_pau_142_feat_table[] = {
 "R:mcep_link.parent.R:segstate.parent.p.ph_cplace",
 NULL };
 
-const cst_cart cmu_us_slt_single_mcep_pau_142_cart = {
+extern const cst_cart cmu_us_slt_single_mcep_pau_142_cart = {
   cmu_us_slt_single_mcep_pau_142_cart_nodes,
   cmu_us_slt_single_mcep_pau_142_feat_table
 };

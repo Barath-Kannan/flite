@@ -120,6 +120,6 @@ static const char* const us_nums_feat_table[] = {
     "name",
     NULL};
 
-const cst_cart us_nums_cart = {
+extern const cst_cart us_nums_cart = {
     us_nums_cart_nodes,
     us_nums_feat_table};

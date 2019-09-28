@@ -1654,7 +1654,7 @@ static const cst_diphone_entry cmu_us_kal16_index[] = {
     {"zh-zh", 18940, 5, 5},
     {0, 0, 0, 0}};
 
-const cst_diphone_db cmu_us_kal16_db = {
+extern const cst_diphone_db cmu_us_kal16_db = {
     "cmu_us_kal16",
     1623,
     cmu_us_kal16_index,

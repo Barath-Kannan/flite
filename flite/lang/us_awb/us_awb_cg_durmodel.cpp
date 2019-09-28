@@ -5532,6 +5532,6 @@ static const char* const cmu_us_awb_dur_feat_table[] = {
     "R:segstate.parent.p.ph_vc",
     NULL};
 
-const cst_cart cmu_us_awb_dur_cart = {
+extern const cst_cart cmu_us_awb_dur_cart = {
     cmu_us_awb_dur_cart_nodes,
     cmu_us_awb_dur_feat_table};

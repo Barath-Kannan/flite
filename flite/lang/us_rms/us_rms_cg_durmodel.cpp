@@ -5557,6 +5557,6 @@ static const char* const cmu_us_rms_dur_feat_table[] = {
     "R:segstate.parent.nn.ph_vrnd",
     NULL};
 
-const cst_cart cmu_us_rms_dur_cart = {
+extern const cst_cart cmu_us_rms_dur_cart = {
     cmu_us_rms_dur_cart_nodes,
     cmu_us_rms_dur_feat_table};

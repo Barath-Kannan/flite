@@ -214,7 +214,7 @@ static const cst_val* const us_featvals[] = {
     (cst_val*)&featval_16,
     NULL};
 
-const cst_phoneset us_phoneset = {
+extern const cst_phoneset us_phoneset = {
     "us",
     us_featnames,
     us_featvals,

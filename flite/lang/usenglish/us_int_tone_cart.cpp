@@ -126,6 +126,6 @@ static const char* const us_int_tone_feat_table[] = {
     "R:SylStructure.parent.R:Word.p.p.gpos",
     NULL};
 
-const cst_cart us_int_tone_cart = {
+extern const cst_cart us_int_tone_cart = {
     us_int_tone_cart_nodes,
     us_int_tone_feat_table};

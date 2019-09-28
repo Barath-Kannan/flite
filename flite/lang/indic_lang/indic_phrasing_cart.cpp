@@ -37,6 +37,6 @@ static const char* const cmu_indic_phrasing_feat_table[] = {
     "n.name",
     NULL};
 
-const cst_cart cmu_indic_phrasing_cart = {
+extern const cst_cart cmu_indic_phrasing_cart = {
     cmu_indic_phrasing_cart_nodes,
     cmu_indic_phrasing_feat_table};

@@ -6,7 +6,7 @@
 /* Then converted to C for CMU Flite (cmuflite.org)                         */
 #include "flite/flite.hpp"
 
-const int num_unicode_sampa_mapping = 16797;
+extern const int num_unicode_sampa_mapping = 16797;
 extern const char* const unicode_sampa_mapping[16798][5] =
     {
         {"let_a", "A", NULL, NULL, NULL},

@@ -37,6 +37,6 @@ static const char* const us_phrasing_feat_table[] = {
     "n.name",
     NULL};
 
-const cst_cart us_phrasing_cart = {
+extern const cst_cart us_phrasing_cart = {
     us_phrasing_cart_nodes,
     us_phrasing_feat_table};

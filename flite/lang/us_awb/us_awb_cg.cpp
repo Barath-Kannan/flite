@@ -653,7 +653,7 @@ extern const dur_stat** cmu_us_awb_dur_stats_table[] = {
 extern const cst_cart* cmu_us_awb_dur_cart_table[] = {
     &cmu_us_awb_dur_cart};
 
-const cst_cg_db cmu_us_awb_cg_db = {
+extern const cst_cg_db cmu_us_awb_cg_db = {
     "cmu_us_awb",
     cmu_us_awb_types,
     cmu_us_awb_num_types,

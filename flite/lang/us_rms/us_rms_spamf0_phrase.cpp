@@ -492,7 +492,7 @@ static const char * const cmu_us_rms_spamf0_phrase_feat_table[] = {
 "R:SylStructure.parent.R:Syllable.p.p.lisp_cg_break",
 NULL };
 
-const cst_cart cmu_us_rms_spamf0_phrase_cart = {
+extern const cst_cart cmu_us_rms_spamf0_phrase_cart = {
   cmu_us_rms_spamf0_phrase_cart_nodes,
   cmu_us_rms_spamf0_phrase_feat_table
 };

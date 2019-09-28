@@ -916,6 +916,6 @@ static const char* const us_durz_feat_table[] = {
     "ph_vheight",
     NULL};
 
-const cst_cart us_durz_cart = {
+extern const cst_cart us_durz_cart = {
     us_durz_cart_nodes,
     us_durz_feat_table};

@@ -432,7 +432,7 @@ extern const cst_cart *cmu_us_rms_dur_cart_table[] = {
     &cmu_us_rms_dur_cart
 };
 
-const cst_cg_db cmu_us_rms_cg_db = {
+extern const cst_cg_db cmu_us_rms_cg_db = {
   "cmu_us_rms",
   cmu_us_rms_types,
   cmu_us_rms_num_types,

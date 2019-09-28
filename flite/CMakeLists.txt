@@ -284,7 +284,8 @@ add_library(flite_indic_lex
     ${S}/indic_lex.hpp ${S}/indic_lex.cpp)
 
 target_link_libraries(flite_indic_lex
-    PUBLIC flite)
+    PUBLIC flite
+    PUBLIC flite_lex)
 
 set(S lang/lex)
 add_library(flite_lex

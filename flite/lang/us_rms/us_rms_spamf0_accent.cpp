@@ -221,7 +221,7 @@ static const char * const cmu_us_rms_spamf0_accent_feat_table[] = {
 "pp.stress",
 NULL };
 
-const cst_cart cmu_us_rms_spamf0_accent_cart = {
+extern const cst_cart cmu_us_rms_spamf0_accent_cart = {
   cmu_us_rms_spamf0_accent_cart_nodes,
   cmu_us_rms_spamf0_accent_feat_table
 };

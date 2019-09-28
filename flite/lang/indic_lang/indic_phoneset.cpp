@@ -388,7 +388,7 @@ static const cst_val* const cmu_indic_featvals[] = {
     (cst_val*)&featval_16,
     NULL};
 
-const cst_phoneset cmu_indic_phoneset = {
+extern const cst_phoneset cmu_indic_phoneset = {
     "cmu_indic",
     cmu_indic_featnames,
     cmu_indic_featvals,

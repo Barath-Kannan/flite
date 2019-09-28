@@ -326,7 +326,7 @@ int cmu_syl_boundary_mo(const cst_item* i, const cst_val* rest)
     }
 }
 
-static cst_lexicon cmu_lex;
+extern cst_lexicon cmu_lex = {};
 static cst_lts_rules cmu_lts_rules;
 extern const char* const cmu_lts_phone_table[];
 extern const char* const cmu_lts_letter_table[];
