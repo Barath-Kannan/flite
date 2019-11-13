@@ -10,13 +10,6 @@ extern const cst_regex* const cst_regex_table[] = {
 
 static char* regularize(const char* unregex, int match);
 
-void cst_regex_init()
-{
-    /* no need to initialize regexes anymore, they are pre-compiled */
-
-    return;
-}
-
 int cst_regex_match(const cst_regex* r, const char* str)
 {
     cst_regstate* s;

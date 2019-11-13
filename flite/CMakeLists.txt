@@ -425,3 +425,20 @@ target_link_libraries(flite_us_slt
     PUBLIC flite
     PUBLIC flite_lex
     PUBLIC flite_usenglish)
+
+set(H include/flite/lang)
+set(S src)
+add_library(flite_lang
+    ${H}/us_awb.hpp
+    ${H}/us_kal16.hpp
+    ${H}/us_kal.hpp
+    ${H}/us_rms.hpp
+    ${H}/us_slt.hpp
+    ${S}/dummy.cpp)
+
+target_link_libraries(flite_lang
+    PUBLIC flite_us_slt
+    PUBLIC flite_us_rms
+    PUBLIC flite_us_kal16
+    PUBLIC flite_us_kal
+    PUBLIC flite_us_awb)

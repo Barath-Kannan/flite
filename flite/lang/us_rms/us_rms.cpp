@@ -6,18 +6,13 @@
 #include "lex.hpp"
 #include "usenglish.hpp"
 
+#include <string>
+
 extern cst_cg_db cmu_us_rms_cg_db;
-cst_voice* cmu_us_rms_cg = NULL;
 
-cst_voice* register_cmu_us_rms(const char* voxdir)
+cst_voice* register_cmu_us_rms(const char* voxdir, cst_voice* vox)
 {
-    cst_voice* vox;
     cst_lexicon* lex;
-
-    if (cmu_us_rms_cg)
-        return cmu_us_rms_cg; /* Already registered */
-
-    vox = new_voice();
     vox->name = "rms";
 
     /* Sets up language specific parameters in the cmu_us_rms. */
@@ -41,15 +36,24 @@ cst_voice* register_cmu_us_rms(const char* voxdir)
     flite_feat_set(vox->features, "cg_db", cg_db_val(&cmu_us_rms_cg_db));
     flite_feat_set_int(vox->features, "sample_rate", cmu_us_rms_cg_db.sample_rate);
 
-    cmu_us_rms_cg = vox;
-
-    return cmu_us_rms_cg;
+    return vox;
 }
 
-void unregister_cmu_us_rms(cst_voice* vox)
+cst_voice* register_cmu_us_rms(const char* voxdir)
 {
-    if (vox != cmu_us_rms_cg)
-        return;
-    delete_voice(vox);
-    cmu_us_rms_cg = NULL;
+    cst_voice* vox;
+    vox = new_voice();
+    return register_cmu_us_rms(voxdir, vox);
 }
+
+namespace flite {
+
+voice make_us_rms(std::string_view voxdir)
+{
+    voice v;
+    const auto s = std::string{voxdir};
+    register_cmu_us_rms(s.c_str(), v.operator->());
+    return v;
+}
+
+} // namespace flite

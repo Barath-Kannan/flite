@@ -5,6 +5,8 @@
 #include "flite/utils/tokenstream.hpp"
 #include "flite/wavesynth/clunits.hpp"
 
+#include <cassert>
+
 #ifdef WIN32
 /* For Visual Studio 2012 global variable definitions */
 #define GLOBALVARDEF __declspec(dllexport)
@@ -12,29 +14,12 @@
 #define GLOBALVARDEF
 #endif
 
-/* This is a global, which isn't ideal, this may change */
-/* It is set when flite_set_voice_list() is called which happens in */
-/* flite_main(), but it is now also possible to leave this unset if */
-/* all voice selection names are pathnames to (cg) ./flitevox files */
-/* then this gets populated as the voices get loaded                */
-/* Note these voices remain loaded, there is currently no automatic */
-/* garbage collection, that would be necessary in the long run      */
-/* delete_voice will work, but you'd need to know when to call it   */
-GLOBALVARDEF cst_val* flite_voice_list = NULL;
-
 /* Another global with hold pointers to the language and lexicon    */
 /* initalization functions, we limiting to 20 but it could be bigger */
 /* if we really did support over 20 different languages             */
 #define FLITE_MAX_LANGS 20
 GLOBALVARDEF cst_lang flite_lang_list[FLITE_MAX_LANGS];
 GLOBALVARDEF int flite_lang_list_length = 0;
-
-int flite_init()
-{
-    cst_regex_init();
-
-    return 0;
-}
 
 int flite_voice_dump(cst_voice* voice, const char* filename)
 {
@@ -52,26 +37,6 @@ cst_voice* flite_voice_load(const char* filename)
     return v;
 }
 
-int flite_add_voice(cst_voice* voice)
-{
-    const cst_val* x;
-    if (voice) {
-        /* add to second place -- first is default voice */
-        /* This is thread unsafe */
-        if (flite_voice_list) { /* Other voices -- first is default, add this second */
-            x = cons_val(voice_val(voice), val_cdr(flite_voice_list));
-            set_cdr((cst_val*)(void*)flite_voice_list, x);
-        }
-        else { /* Only voice so goes on front */
-            flite_voice_list = cons_val(voice_val(voice), flite_voice_list);
-        }
-
-        return TRUE;
-    }
-    else
-        return FALSE;
-}
-
 int flite_add_lang(const char* langname, void (*lang_init)(cst_voice* vox), cst_lexicon* (*lex_init)())
 {
     if (flite_lang_list_length < (FLITE_MAX_LANGS - 1)) {
@@ -87,40 +52,41 @@ int flite_add_lang(const char* langname, void (*lang_init)(cst_voice* vox), cst_
 
 cst_voice* flite_voice_select(const char* name)
 {
-    const cst_val* v;
-    cst_voice* voice;
+    assert(false);
+    //const cst_val* v;
+    //cst_voice* voice;
 
-    if (name == NULL) {
-        if (flite_voice_list == NULL)
-            return NULL; /* oops, not good */
-        return val_voice(val_car(flite_voice_list));
-    }
+    //if (name == NULL) {
+    //    if (flite_voice_list == NULL)
+    //        return NULL; /* oops, not good */
+    //    return val_voice(val_car(flite_voice_list));
+    //}
 
-    for (v = flite_voice_list; v; v = val_cdr(v)) {
-        voice = val_voice(val_car(v));
-        if (cst_streq(name, voice->name)) /* short name */
-            return voice;
-        if (cst_streq(name, get_param_string(voice->features, "name", "")))
-            /* longer name */
-            return voice;
-        if (cst_streq(name, get_param_string(voice->features, "pathname", "")))
-            /* even longer name (url) */
-            return voice;
-    }
+    //for (v = flite_voice_list; v; v = val_cdr(v)) {
+    //    voice = val_voice(val_car(v));
+    //    if (cst_streq(name, voice->name)) /* short name */
+    //        return voice;
+    //    if (cst_streq(name, get_param_string(voice->features, "name", "")))
+    //        /* longer name */
+    //        return voice;
+    //    if (cst_streq(name, get_param_string(voice->features, "pathname", "")))
+    //        /* even longer name (url) */
+    //        return voice;
+    //}
 
-    if (cst_urlp(name) || /* naive check if its a url */
-        cst_strchr(name, '/') ||
-        cst_strchr(name, '\\') ||
-        cst_strstr(name, ".flitevox")) {
-        voice = flite_voice_load(name);
-        if (!voice)
-            cst_errmsg("Error load voice: failed to load voice from %s\n", name);
-        else
-            flite_add_voice(voice);
-        return voice;
-    }
+    //if (cst_urlp(name) || /* naive check if its a url */
+    //    cst_strchr(name, '/') ||
+    //    cst_strchr(name, '\\') ||
+    //    cst_strstr(name, ".flitevox")) {
+    //    voice = flite_voice_load(name);
+    //    if (!voice)
+    //        cst_errmsg("Error load voice: failed to load voice from %s\n", name);
+    //    else
+    //        flite_add_voice(voice);
+    //    return voice;
+    //}
 
-    return flite_voice_select(NULL);
+    //return flite_voice_select(NULL);
 }
 
 int flite_voice_add_lex_addenda(cst_voice* v, const cst_string* lexfile)

@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 ################################################
 # Dependencies
 ################################################
-#find_package(Boost COMPONENTS program_options REQUIRED)
+find_package(Boost COMPONENTS program_options system REQUIRED)
 
 ################################################
 # Targets 
@@ -30,4 +30,5 @@ target_link_libraries(flite_main
     PUBLIC flite_us_slt
     PUBLIC flite_us_rms
     PUBLIC flite_us_awb
-    PUBLIC flite_usenglish)
+    PUBLIC flite_usenglish
+    PUBLIC Boost::system)

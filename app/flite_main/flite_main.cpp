@@ -1,12 +1,18 @@
+#include "flite/flite.hpp"
+#include "flite/flite_version.hpp"
+
+#include <boost/optional.hpp>
+
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 #include <sys/time.h>
 
-#include "flite/flite.hpp"
-#include "flite/flite_version.hpp"
-
-cst_val* flite_set_voice_list(const char* voxdir);
+std::vector<flite::voice> flite_set_voice_list(const char* voxdir);
 void* flite_set_lang_list(void);
 
 void cst_alloc_debug_summary();
@@ -61,19 +67,26 @@ static void flite_usage()
     exit(0);
 }
 
-static void flite_voice_list_print(void)
+static void print_voice_list(const std::vector<flite::voice>& voices)
 {
-    cst_voice* voice;
-    const cst_val* v;
-
     printf("Voices available: \n");
-    for (v = flite_voice_list; v; v = val_cdr(v)) {
-        voice = val_voice(val_car(v));
-        printf("%s ", voice->name);
-    }
-    printf("\n");
-
+    for (const flite::voice& v : voices)
+        std::cout << v->name << " ";
+    std::cout << "\n";
     return;
+}
+
+static auto get_voice(
+    const std::string& s,
+    std::vector<flite::voice>& voices)
+    -> boost::optional<flite::voice&>
+{
+    auto it = std::find_if(voices.begin(), voices.end(), [&](const flite::voice& voice) {
+        return s == voice->name;
+    });
+    if (it == voices.end())
+        return boost::none;
+    return *it;
 }
 
 static cst_utterance* print_info(cst_utterance* u)
@@ -143,7 +156,7 @@ int main(int argc, char** argv)
     cst_voice* v;
     const char* filename;
     const char* outtype;
-    cst_voice* desired_voice = 0;
+    boost::optional<flite::voice&> desired_voice;
     const char* voicedir = NULL;
     int i;
     float durs;
@@ -156,6 +169,7 @@ int main(int argc, char** argv)
     const char* lex_addenda_file = NULL;
     const char* voicedumpfile = NULL;
     cst_audio_streaming_info* asi;
+    std::vector<flite::voice> voices;
 
     filename = 0;
     outtype = "play"; /* default is to play */
@@ -166,7 +180,6 @@ int main(int argc, char** argv)
     ssml_mode = FALSE;
     extra_feats = new_features();
 
-    flite_init();
     flite_set_lang_list(); /* defined at compilation time */
 
     for (i = 1; i < argc; i++) {
@@ -179,9 +192,9 @@ int main(int argc, char** argv)
         else if (cst_streq(argv[i], "-v"))
             flite_verbose = TRUE;
         else if (cst_streq(argv[i], "-lv")) {
-            if (flite_voice_list == NULL)
-                flite_set_voice_list(voicedir);
-            flite_voice_list_print();
+            if (voices.empty())
+                voices = flite_set_voice_list(voicedir);
+            print_voice_list(voices);
             exit(0);
         }
         else if (cst_streq(argv[i], "-l"))
@@ -195,15 +208,16 @@ int main(int argc, char** argv)
             i++;
         }
         else if ((cst_streq(argv[i], "-voice")) && (i + 1 < argc)) {
-            if (flite_voice_list == NULL)
-                flite_set_voice_list(voicedir);
-            desired_voice = flite_voice_select(argv[i + 1]);
+            if (voices.empty()) {
+                voices = flite_set_voice_list(voicedir);
+            }
+            desired_voice = get_voice(argv[i + 1], voices);
             i++;
         }
         else if ((cst_streq(argv[i], "-voicedir")) && (i + 1 < argc)) {
             voicedir = argv[i + 1];
-            if (flite_voice_list == NULL)
-                flite_set_voice_list(voicedir);
+            if (voices.empty())
+                voices = flite_set_voice_list(voicedir);
             i++;
         }
         else if ((cst_streq(argv[i], "-add_lex")) && (i + 1 < argc)) {
@@ -278,12 +292,14 @@ int main(int argc, char** argv)
     }
 
     if (filename == NULL) filename = "-"; /* stdin */
-    if (flite_voice_list == NULL)
-        flite_set_voice_list(voicedir);
-    if (desired_voice == 0)
-        desired_voice = flite_voice_select(NULL);
+    if (voices.empty()) {
+        voices = flite_set_voice_list(voicedir);
+    }
+    assert(!voices.empty());
+    if (!desired_voice)
+        desired_voice = voices.front();
 
-    v = desired_voice;
+    v = desired_voice->operator->();
     feat_copy_into(extra_feats, v->features);
     durs = 0.0;
 
@@ -336,8 +352,6 @@ loop:
         goto loop;
 
     delete_features(extra_feats);
-    delete_val(flite_voice_list);
-    flite_voice_list = 0;
     /*    cst_alloc_debug_summary(); */
 
     return 0;

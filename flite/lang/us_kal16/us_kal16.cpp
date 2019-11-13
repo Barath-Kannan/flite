@@ -4,18 +4,13 @@
 #include "usenglish.hpp"
 
 #include <string.h>
+#include <string>
 
 extern cst_diphone_db cmu_us_kal16_db;
 
-cst_voice* cmu_us_kal16_diphone = NULL;
-
-cst_voice* register_cmu_us_kal16(const char* voxdir)
+cst_voice* register_cmu_us_kal16(const char* voxdir, cst_voice* v)
 {
-    cst_voice* v;
     cst_lexicon* lex;
-
-    if (cmu_us_kal16_diphone)
-        return cmu_us_kal16_diphone; /* Already registered */
 
     v = new_voice();
     v->name = "kal16";
@@ -43,15 +38,24 @@ cst_voice* register_cmu_us_kal16(const char* voxdir)
     feat_set_string(v->features, "join_type", "modified_lpc");
     feat_set_string(v->features, "resynth_type", "fixed");
 
-    cmu_us_kal16_diphone = v;
-
-    return cmu_us_kal16_diphone;
+    return v;
 }
 
-void unregister_cmu_us_kal16(cst_voice* vox)
+cst_voice* register_cmu_us_kal16(const char* voxdir)
 {
-    if (vox != cmu_us_kal16_diphone)
-        return;
-    delete_voice(vox);
-    cmu_us_kal16_diphone = NULL;
+    cst_voice* vox;
+    vox = new_voice();
+    return register_cmu_us_kal16(voxdir, vox);
 }
+
+namespace flite {
+
+voice make_us_kal16(std::string_view voxdir)
+{
+    voice v;
+    const auto s = std::string{voxdir};
+    register_cmu_us_kal16(s.c_str(), v.operator->());
+    return v;
+}
+
+} // namespace flite

@@ -55,9 +55,6 @@ void hs_regdelete(cst_regex*);
    } */
 size_t cst_regsub(const cst_regstate* r, const char* in, char* out, size_t max);
 
-/* Initialize the regex engine and global regex constants */
-void cst_regex_init();
-
 /* Regexps used in text processing (these are latin-alphabet specific
    and to some extent US English-specific) */
 extern const cst_regex* const cst_rx_white;

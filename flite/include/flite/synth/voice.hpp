@@ -7,6 +7,8 @@
 #include "flite/utils/file.hpp"
 #include "flite/utils/val.hpp"
 
+#include <string_view>
+
 struct cst_voice_struct {
     const char* name;
 
@@ -18,6 +20,7 @@ struct cst_voice_struct {
        before synthesis. */
     cst_utterance* (*utt_init)(cst_utterance* u, struct cst_voice_struct* v);
 };
+
 typedef struct cst_voice_struct cst_voice;
 
 /* Hold pointers to language and lexicon init function */
@@ -40,3 +43,25 @@ cst_voice* cst_cg_load_voice(const char* voxdir, const cst_lang lang_table[]);
 int cst_cg_dump_voice(const cst_voice* v, const cst_string* filename);
 
 CST_VAL_USER_TYPE_DCLS(voice, cst_voice)
+
+namespace flite {
+
+class voice {
+public:
+    voice() noexcept;
+    voice(std::string_view voxdir, cst_lang lang_table[]);
+    voice(voice&&) noexcept;
+    voice& operator=(voice&&) noexcept;
+    voice(const voice&) = delete;
+    voice& operator=(const voice&) = delete;
+
+    ~voice();
+
+    auto operator-> () -> cst_voice*;
+    auto operator-> () const -> const cst_voice*;
+
+private:
+    cst_voice* _voice;
+};
+
+} // namespace flite

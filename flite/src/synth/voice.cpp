@@ -4,6 +4,8 @@
 #include "flite/utils/features.hpp"
 #include "flite/wavesynth/clunits.hpp"
 
+#include <functional>
+
 CST_VAL_REGISTER_TYPE(voice, cst_voice)
 
 cst_voice* new_voice()
@@ -111,3 +113,45 @@ int flite_munmap_clunit_voxdata(cst_voice* voice)
 
     return 0;
 }
+
+namespace flite {
+
+voice::voice() noexcept
+    : _voice{new_voice()}
+{}
+
+voice::voice(std::string_view voxdir, cst_lang lang_table[])
+    : _voice(std::invoke([&]() {
+        // need a null terminated string :(
+        const auto s = std::string(voxdir);
+        return cst_cg_load_voice(s.data(), lang_table);
+    }))
+{}
+
+voice::voice(voice&& v) noexcept
+    : _voice{std::exchange(v._voice, nullptr)}
+{}
+
+voice& voice::operator=(voice&& v) noexcept
+{
+    std::swap(_voice, v._voice);
+    return *this;
+}
+
+voice::~voice()
+{
+    delete_voice(_voice);
+    _voice = nullptr;
+}
+
+auto voice::operator-> () -> cst_voice*
+{
+    return _voice;
+}
+
+auto voice::operator-> () const -> const cst_voice*
+{
+    return _voice;
+}
+
+} // namespace flite
