@@ -7,6 +7,7 @@
 #include "flite/lang/us_rms.hpp"
 #include "flite/lang/us_slt.hpp"
 
+#include <string_view>
 #include <vector>
 
 cst_voice* register_cmu_us_slt(const char* voxdir);
@@ -15,7 +16,7 @@ cst_voice* register_cmu_us_kal16(const char* voxdir);
 cst_voice* register_cmu_us_kal(const char* voxdir);
 cst_voice* register_cmu_us_awb(const char* voxdir);
 
-std::vector<flite::voice> flite_set_voice_list(const char* voxdir)
+std::vector<flite::voice> flite_set_voice_list(std::string_view voxdir)
 {
     std::vector<flite::voice> voices;
     voices.reserve(5);

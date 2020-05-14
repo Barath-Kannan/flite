@@ -11,13 +11,15 @@
 
 extern cst_cg_db cmu_us_awb_cg_db;
 
-cst_voice* register_cmu_us_awb(const char* voxdir, cst_voice* vox)
+namespace flite {
+
+void register_cmu_us_awb(const char* voxdir, voice& vox)
 {
     cst_lexicon* lex;
     vox->name = "awb";
 
     /* Sets up language specific parameters in the cmu_us_awb. */
-    usenglish_init(vox);
+    usenglish_init(vox.operator->());
 
     /* Things that weren't filled in already. */
     flite_feat_set_string(vox->features, "name", "cmu_us_awb");
@@ -36,24 +38,13 @@ cst_voice* register_cmu_us_awb(const char* voxdir, cst_voice* vox)
     flite_feat_set(vox->features, "wave_synth_func", uttfunc_val(&cg_synth));
     flite_feat_set(vox->features, "cg_db", cg_db_val(&cmu_us_awb_cg_db));
     flite_feat_set_int(vox->features, "sample_rate", cmu_us_awb_cg_db.sample_rate);
-
-    return vox;
 }
-
-cst_voice* register_cmu_us_awb(const char* voxdir)
-{
-    cst_voice* vox;
-    vox = new_voice();
-    return register_cmu_us_awb(voxdir, vox);
-}
-
-namespace flite {
 
 voice make_us_awb(std::string_view voxdir)
 {
     voice v;
     const auto s = std::string{voxdir};
-    register_cmu_us_awb(s.c_str(), v.operator->());
+    register_cmu_us_awb(s.c_str(), v);
     return v;
 }
 

@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <string_view>
 #include <vector>
 
 #include <stdio.h>
@@ -12,7 +13,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-std::vector<flite::voice> flite_set_voice_list(const char* voxdir);
+std::vector<flite::voice> flite_set_voice_list(std::string_view voxdir);
 void* flite_set_lang_list(void);
 
 void cst_alloc_debug_summary();
@@ -157,7 +158,7 @@ int main(int argc, char** argv)
     const char* filename;
     const char* outtype;
     boost::optional<flite::voice&> desired_voice;
-    const char* voicedir = NULL;
+    std::string_view voice_dir;
     int i;
     float durs;
     double time_start, time_end;
@@ -193,7 +194,7 @@ int main(int argc, char** argv)
             flite_verbose = TRUE;
         else if (cst_streq(argv[i], "-lv")) {
             if (voices.empty())
-                voices = flite_set_voice_list(voicedir);
+                voices = flite_set_voice_list(voice_dir);
             print_voice_list(voices);
             exit(0);
         }
@@ -209,15 +210,15 @@ int main(int argc, char** argv)
         }
         else if ((cst_streq(argv[i], "-voice")) && (i + 1 < argc)) {
             if (voices.empty()) {
-                voices = flite_set_voice_list(voicedir);
+                voices = flite_set_voice_list(voice_dir);
             }
             desired_voice = get_voice(argv[i + 1], voices);
             i++;
         }
         else if ((cst_streq(argv[i], "-voicedir")) && (i + 1 < argc)) {
-            voicedir = argv[i + 1];
+            voice_dir = argv[i + 1];
             if (voices.empty())
-                voices = flite_set_voice_list(voicedir);
+                voices = flite_set_voice_list(voice_dir);
             i++;
         }
         else if ((cst_streq(argv[i], "-add_lex")) && (i + 1 < argc)) {
@@ -293,7 +294,7 @@ int main(int argc, char** argv)
 
     if (filename == NULL) filename = "-"; /* stdin */
     if (voices.empty()) {
-        voices = flite_set_voice_list(voicedir);
+        voices = flite_set_voice_list(voice_dir);
     }
     assert(!voices.empty());
     if (!desired_voice)

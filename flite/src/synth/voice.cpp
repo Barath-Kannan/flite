@@ -5,6 +5,7 @@
 #include "flite/wavesynth/clunits.hpp"
 
 #include <functional>
+#include <string>
 
 CST_VAL_REGISTER_TYPE(voice, cst_voice)
 

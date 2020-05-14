@@ -50,6 +50,7 @@ class voice {
 public:
     voice() noexcept;
     voice(std::string_view voxdir, cst_lang lang_table[]);
+
     voice(voice&&) noexcept;
     voice& operator=(voice&&) noexcept;
     voice(const voice&) = delete;
